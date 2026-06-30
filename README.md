@@ -1,76 +1,75 @@
-"""# Plataforma Educativa Interactiva - Central de Aprendizaje Global
+# Plataforma Educativa Interactiva - Central de Aprendizaje Global
 
-¡Bienvenido al repositorio de la **Plataforma Educativa Interactiva**! Este proyecto es una aplicación web responsiva diseñada para estudiantes de educación primaria (con un enfoque inicial implementado para 6to Grado). Su objetivo principal es transformar el estudio de las ciencias en una experiencia dinámica, accesible y gamificada, combinando la lectura comprensiva con herramientas de audio, diccionarios en tiempo real y evaluaciones adaptativas de auto-superación.
+¡Bienvenido al repositorio oficial de la **Plataforma Educativa Interactiva**! Esta aplicación web responsiva, accesible y modular ha sido desarrollada utilizando tecnologías web nativas para asistir a estudiantes de educación primaria. El sistema transforma los contenidos curriculares tradicionales en una experiencia inmersiva de autoaprendizaje mediante la combinación de audiolibros interactivos, diccionarios reactivos en tiempo real y simulacros de examen gamificados con persistencia de datos local.
 
 ---
 
 ## 🎯 Objetivos de la Plataforma
 
-1. **Fomentar la Autonomía:** Permitir que los alumnos exploren los contenidos curriculares a su propio ritmo.
-2. **Accesibilidad e Inclusión:** Integrar un sistema nativo de audiolibros interactivos para asistir a alumnos con distintas capacidades de lectura o estilos de aprendizaje.
-3. **Refuerzo y Validación Inmediata:** Proveer retroalimentación en tiempo real tanto en la lectura pasiva como en los exámenes activos.
-4. **Estimulación de Logros:** Utilizar dinámicas de gamificación (puntos, récords y rangos) para incentivar el repaso continuo de los temas.
+1. **Fomentar la Autonomía Estudiantil:** Proporcionar un entorno educativo controlado donde el alumno explore los conceptos conceptuales a su propio ritmo sin depender de supervisión constante.
+2. **Garantizar la Accesibilidad Universal:** Implementar soporte de lectura por voz nativa para asistir de forma efectiva a estudiantes con dificultades visuales, dislexia o diferentes ritmos de apropiación de la lectura.
+3. **Validación Conceptual Inmediata:** Intercalar la lectura pasiva con retos prácticos directos (mini-preguntas) para asentar la retención de datos antes de avanzar a nuevos bloques teóricos.
+4. **Mitigar la Ansiedad Frente a Exámenes:** Utilizar dinámicas lúdicas de gamificación (puntos, récords históricos e insignias de rango) para que las evaluaciones contra reloj sean vistas como un mecanismo de autosuperación y no de castigo.
 
 ---
 
 ## 🗺️ Sistema de Navegación y Flujo de la App
 
-La plataforma funciona como una **Máquina de Estados de Capas** gestionada a través de la variable global `capaActual` y el método centralizador `cambiarCapa(nuevaCapa)`. Esto evita recargas de página innecesarias y asegura una experiencia fluida y controlada.
+La aplicación está gobernada en su totalidad por una arquitectura de **Máquina de Estados de Capas** en el frontend. En lugar de realizar recargas de página o redirecciones HTTP clásicas, el ciclo de vida de la interfaz se controla mediante la variable global `capaActual` y el método centralizador de renderizado `cambiarCapa(nuevaCapa)`.
 
-### Flujo de Capas de la Interfaz:
-1. **Selección de Grado (`seleccion-grado`):** Pantalla de bienvenida donde el usuario elige su nivel académico actual (6to Grado disponible por defecto).
-2. **Selección de Trimestre (`seleccion-trimestre`):** Segmenta los contenidos del año en bloques pedagógicos manejables (1er Trimestre / T1 y 2do Trimestre / T2).
-3. **Central de Estudio / Menú de Enfoque (`menu-enfoque`):** El "Hub" o panel principal del trimestre elegido, desde donde el estudiante decide qué estrategia de aprendizaje aplicar.
-4. **Módulos de Enfoque Específicos:**
-   * **Guía de Aprendizaje Interactiva (`guia-aprendizaje`):** Lectura guiada tema por tema.
-   * **Biblioteca de Resúmenes (`biblioteca`):** Vista consolidada de síntesis conceptuales rápidas.
-   * **Glosario de Términos (`glosario`):** Diccionario interactivo de palabras clave con buscador integrado.
-   * **Panel de Simulacros (`simulacro-menu` y `simulacro`):** Secciones dedicadas a las evaluaciones contra reloj e historial.
+### Mapeo Exhaustivo de Capas de Interfaz:
+* **`seleccion-grado`:** Pantalla raíz de bienvenida. Presenta los niveles escolares disponibles en el sistema.
+* **`seleccion-trimestre`:** Filtra el recorrido del año lectivo tras seleccionar un grado, dividiendo la carga en bloques pedagógicos estándar (`Q1` para Primer Trimestre, `Q2` para Segundo Trimestre).
+* **`menu-enfoque`:** El panel de control central (Hub) de la materia y trimestre seleccionados. Expone los accesos dinámicos hacia los cuatro modos de estudio disponibles.
+* **`guia-aprendizaje`:** Interfaz de lectura interactiva equipada con controles de reproducción de audiolibro por párrafos y desafíos de validación rápida.
+* **`biblioteca`:** Consola de visualización de resúmenes sintéticos limpios extraídos directamente de la base de datos de lecciones.
+* **`glosario`:** Panel de consulta terminológica provisto de un motor de búsqueda instantáneo reactivo al tecleo del usuario.
+* **`simulacro-menu`:** Antesala de evaluación que muestra las reglas del examen, las estadísticas de puntuación máxima y el historial cronológico de intentos guardados.
+* **`simulacro`:** Entorno de examen adaptativo contra reloj de opción múltiple, con renderizado de preguntas, cronómetro dinámico y despliegue de pistas pedagógicas.
 
-### Retorno Inteligente y Contextual (`volverAtras()`)
-El sistema cuenta con un botón único de retorno que evalúa de forma inteligente en qué capa se encuentra el usuario para regresarlo exactamente al nivel inmediato anterior de la jerarquía o solicitar confirmación de seguridad si se intenta abandonar una evaluación activa (evitando la pérdida accidental de progreso).
+### Sistema de Retorno Inteligente y Contextual (`volverAtras()`)
+El control de navegación de retorno ejecuta una limpieza y validación de estado rigurosa antes de alterar la capa visual:
+1. **Cancelación de Audio:** Invoca inmediatamente `window.speechSynthesis.cancel()` y setea el estado global `estadoAudio = "detenido"` para evitar que la lectura de voz continúe reproduciéndose en segundo plano si el usuario abandona una lección.
+2. **Navegación Condicional:** * Si `capaActual === "seleccion-trimestre"`, purga el almacenamiento de sesión ejecutando `localStorage.removeItem("grado")`, inicializa `gradoSeleccionado = null` y redirige a `renderSeleccionGrado()`.
+   * Si `capaActual === "menu-enfoque"`, devuelve al alumno a la selección de trimestres escolares (`irAPantallaTrimestre()`).
+   * Si la capa actual pertenece a un módulo de estudio (`guia-aprendizaje`, `biblioteca`, `glosario`, `simulacro-menu`), restablece la vista al panel principal del trimestre.
+3. **Protocolo de Seguridad en Exámenes:** Si el alumno activa el retorno mientras realiza una evaluación activa (`capaActual === "simulacro"`), la función detiene el flujo de salida de inmediato e invoca un cuadro de confirmación nativo. Esto previene de forma absoluta la pérdida accidental del tiempo invertido y del progreso de la prueba por clics involuntarios.
 
 ---
 
 ## 🕹️ Modos de Uso de la Plataforma
 
-Una vez dentro de un trimestre, el estudiante dispone de 4 herramientas complementarias:
+### 1. Guía de Aprendizaje Interactiva y Audiolibro
+Presenta las lecciones teóricas mapeadas dinámicamente. Integra la **Web Speech API** mediante el constructor `SpeechSynthesisUtterance`. Los algoritmos del controlador filtran las voces disponibles en el sistema operativo del cliente para priorizar voces en español nativo (`es-AR`, `es-ES`, o voces sintéticas avanzadas como `Microsoft Tomasa`). El usuario dispone de controles en pantalla para reproducir, pausar, reanudar y detener la lectura fonética del texto en prosa. Para avanzar o consolidar la lección, cada tema incluye una pregunta obligatoria basada en el contenido leído.
 
-1. **Guía de Aprendizaje Interactiva:** Presenta las lecciones detalladas en formato de libro digital. Incluye un control de **Audiolibro** asistido por la API de Síntesis de Voz del navegador (`SpeechSynthesisUtterance`), configurada con voces nativas hispanohablantes que permiten pausar y reanudar la narración. Cada lección cierra con una *Mini-Pregunta de Validación* conceptual.
-2. **Consultar Biblioteca (Resúmenes):** Ideal para repasos rápidos antes de un examen. Extrae las ideas síntesis esenciales de cada tema sin distractores intermedios.
-3. **Diccionario con Buscador:** Permite escribir cualquier término en tiempo real (`oninput`). Filtra instantáneamente la base de datos de definiciones para resolver dudas de vocabulario específico de forma ágil.
-4. **Evaluaciones Contra Reloj:** Un examen adaptativo de opción múltiple con un temporizador global de 30 minutos (1800 segundos). Cuenta con un sistema visual de alertas que cambia de color cuando restan menos de 5 minutos, inyectando dinamismo y entrenando la gestión del tiempo.
+### 2. Consultar Biblioteca (Resúmenes Rápidos)
+Diseñado para técnicas de repaso fluido y estudio de fijación. Esta interfaz extrae selectivamente la propiedad `resumen_corto` de cada una de las lecciones del bloque correspondiente, omitiendo los textos extensos y las preguntas de validación para entregar una hoja de ruta conceptual compacta e ideal para memorización de directrices fundamentales.
+
+### 3. Diccionario con Buscador Dinámico
+El glosario actúa como una base terminológica indexada. El campo de búsqueda implementa un capturador de eventos en tiempo real a través de la propiedad `oninput`. Cada vez que el estudiante presiona una tecla, el sistema ejecuta de manera inmediata un filtro predictivo sobre el arreglo de términos, actualizando el árbol de elementos en pantalla sin demoras ni necesidad de recargar la vista o presionar un botón de confirmación.
+
+### 4. Simulacro de Examen Contra Reloj
+Inicia una evaluación formal estructurada a partir del banco de preguntas del trimestre. El sistema cuenta con un motor de temporizador regresivo configurado a 30 minutos (1800 segundos) gestionado mediante `setInterval`. El componente gráfico del reloj posee reactividad cromática: al cruzar el umbral crítico de los 5 minutos restantes (300 segundos), altera sus estilos CSS dinámicamente cambiando a color rojo con animaciones de parpadeo visual para entrenar al alumno en la gestión del tiempo. Cada pregunta incluye la posibilidad de desplegar un campo de orientación técnica (Pista) que ayuda al razonamiento deductivo sin dar la respuesta directamente.
 
 ---
 
 ## 🏆 Sistema de Puntajes, Récords y Rangos
 
-La plataforma premia el esfuerzo y los conocimientos del usuario mediante un sistema acumulativo de puntuación reflejado en el HUD (Heads-Up Display) superior:
+El progreso académico está completamente gamificado para incentivar la asiduidad del alumno y medir de manera objetiva su evolución a lo largo del tiempo.
 
-### 1. Reglas de Puntuación
-* **Mini-Preguntas de Validación (Lectura):** Responder correctamente una pregunta rápida dentro de las guías de lectura otorga **+5 puntos** directamente al puntaje global. No penaliza en caso de error para incentivar el intento.
-* **Preguntas del Simulacro de Examen:** Cada respuesta correcta en el examen contra reloj añade **+10 puntos**. 
+### 1. Reglas de Asignación de Puntos
+* **Mini-Preguntas de Validación (Guías):** Responder correctamente el desafío al final de una lectura teórica otorga **+5 puntos** directos al marcador global de la sesión. Si la respuesta es incorrecta, la plataforma lo notifica visualmente pero no aplica penalizaciones negativas, promoviendo la experimentación y eliminando el miedo al error.
+* **Preguntas de Simulacro (Examen):** Resolver un reactivo de opción múltiple dentro del simulacro formal contra reloj premia al alumno con **+10 puntos**.
 
-### 2. Persistencia de Datos e Historial
-Los resultados se guardan de forma permanente en el navegador del usuario utilizando `localStorage`:
-* **Máximo Puntaje (`maxScore`):** Registra el récord histórico del alumno. Al finalizar un simulacro, si el puntaje supera al anterior, se celebra un nuevo récord en pantalla.
-* **Historial de Intentos (`historial`):** Almacena una lista de objetos con los resultados previos, registrando la fecha exacta, hora, duración exacta del examen (`minutos:segundos`) y el bloque evaluado, visibles en un panel especializado.
+### 2. Persistencia en Almacenamiento Local (`localStorage`)
+La aplicación no requiere bases de datos en servidores externos, utilizando en su lugar la persistencia del navegador del cliente mediante la API `localStorage`:
+* **Puntaje Máximo Histórico (`maxScore`):** Registra de forma indeleble el récord de puntos más alto alcanzado por el usuario. Al concluir con éxito una evaluación, si el puntaje final supera la marca grabada, el sistema actualiza la clave en el almacenamiento local y activa un flujo visual de felicitación por nuevo récord establecido.
+* **Historial Analítico de Intentos (`historial`):** Cada vez que un simulacro se da por terminado (ya sea por completar todas las preguntas, agotamiento del tiempo o abandono confirmado), el sistema genera un objeto con la marca de tiempo exacta (`fecha`, `hora`), el total de `puntos` obtenidos, la `duracion` consumida formateada en minutos/segundos y el identificador del `bloque` curricular evaluado. Este arreglo se guarda en formato JSON (`JSON.stringify`) y se renderiza en orden cronológico inverso (los intentos más recientes en la parte superior) dentro del menú del simulacro.
 
-### 3. Sistema de Rangos Dinámicos
-El rango del estudiante se calcula automáticamente en función de los puntos acumulados en la sesión:
-* 🐣 **Novato:** De 0 a 19 puntos. Rango inicial de exploración.
-* 🗺️ **Explorador:** De 20 a 39 puntos. Demuestra un recorrido intermedio por los contenidos.
-* 🎓 **Erudito:** 40 puntos o más. Nivel máximo otorgado a quienes completan con éxito múltiples validaciones y simulacros.
+### 3. Clasificación de Rangos Dinámicos
+La plataforma evalúa constantemente el puntaje global acumulado por el estudiante durante su sesión de uso activa para determinar y renderizar su nivel de rango de manera dinámica en el HUD superior:
+* 🐣 **Novato (0 a 19 puntos):** Rango base otorgado al ingresar a la plataforma o al realizar exploraciones iniciales.
+* 🗺️ **Explorador (20 a 39 puntos):** El estudiante demuestra consistencia, habiendo superado con éxito múltiples lecciones y lecturas de control.
+* 🎓 **Erudito (40 puntos o más):** Distinción de honor máxima reservada para los estudiantes que completan simulacros formales con alta efectividad y demuestran un dominio completo de los bloques de estudio.
 
 ---
-
-## 🛠️ Guía Técnica de Expansión (Mantenimiento y Desarrollo)
-
-La plataforma está diseñada bajo una arquitectura desacoplada donde el archivo `datos.js` funciona como la base de datos relacional orientada a objetos (`CONTENIDOS_EDUCATIVOS`) y `codigo-actual.js` procesa los estados y la lógica.
-
-### 1. Habilitar Nuevos Grados
-Para activar grados que actualmente se encuentran bloqueados (como 4to, 5to o 7mo Grado):
-1. Busque la función `renderSeleccionGrado()` en el script.
-2. Localice las tarjetas HTML en la constante literal del string.
-3. Remueva la clase `.disabled` de la tarjeta seleccionada y reemplace el texto del candado por el evento `onclick` correspondiente.
-*Ejemplo para habilitar 5to:*
