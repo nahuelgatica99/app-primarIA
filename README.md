@@ -1,4 +1,4 @@
-readme_content = """# Plataforma Educativa Interactiva - Central de Aprendizaje Global
+"""# Plataforma Educativa Interactiva - Central de Aprendizaje Global
 
 ¡Bienvenido al repositorio de la **Plataforma Educativa Interactiva**! Este proyecto es una aplicación web responsiva diseñada para estudiantes de educación primaria (con un enfoque inicial implementado para 6to Grado). Su objetivo principal es transformar el estudio de las ciencias en una experiencia dinámica, accesible y gamificada, combinando la lectura comprensiva con herramientas de audio, diccionarios en tiempo real y evaluaciones adaptativas de auto-superación.
 
