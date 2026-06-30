@@ -1,0 +1,211 @@
+/* PALETA DE COLORES REFORZADA */
+:root {
+  --rojo-oscuro: #8b0000;      
+  --rojo-principal: #e34234;   
+  --rojo-claro: #ff6b6b;       
+  --fondo-app: #fff5f5;        
+  --texto-oscuro: #2d0a0a;     
+  --blanco: #ffffff;
+  --gris-bloqueado: #94a3b8;
+}
+
+body { 
+  background: var(--rojo-oscuro); 
+  font-family: 'Segoe UI', sans-serif; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  margin: 0; 
+  color: var(--texto-oscuro); 
+}
+
+#game-container {
+  background: var(--fondo-app);
+  width: 100%;
+  max-width: 600px;
+  min-height: 550px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+  background: var(--blanco);
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  color: var(--rojo-oscuro);
+  margin-bottom: 15px;
+}
+
+#screen {
+  flex-grow: 1;
+  background: var(--blanco);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+#title {
+  text-align: center;
+  color: var(--rojo-principal);
+  margin-top: 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--fondo-app);
+  padding-bottom: 10px;
+}
+
+#display-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 340px;
+  padding-right: 5px;
+}
+
+/* NUEVOS COMPONENTES: SELECCIÓN DE GRADOS Y OPCIONES */
+.grid-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card-option {
+  background: var(--blanco);
+  border: 3px solid var(--rojo-claro);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--rojo-oscuro);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.card-option:hover:not(.disabled) {
+  transform: translateY(-3px);
+  background: var(--rojo-claro);
+  color: white;
+  border-color: var(--rojo-principal);
+}
+
+.card-option.disabled {
+  background: #e2e8f0;
+  border-color: var(--gris-bloqueado);
+  color: var(--gris-bloqueado);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* BOTONES DE NAVEGACIÓN Y MENÚS */
+#controls {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-nav, .btn-action {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.btn-nav {
+  background: var(--rojo-principal);
+  color: white;
+}
+
+.btn-nav:hover {
+  background: var(--rojo-oscuro);
+}
+
+.btn-action {
+  background: #f1f5f9;
+  color: var(--texto-oscuro);
+  border: 2px solid #cbd5e1;
+}
+
+.btn-action:hover {
+  background: #e2e8f0;
+}
+
+/* COMPONENTES DEL LIBRO DIGITAL DE APRENDIZAJE */
+.libro-contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.libro-texto {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--texto-oscuro);
+  background: #fffbfa;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 5px solid var(--rojo-principal);
+}
+
+.audio-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  align-self: flex-start;
+}
+
+.audio-control:hover {
+  background: #fde68a;
+}
+
+.validacion-box {
+  background: #f0fdf4;
+  border: 2px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+/* ALERTAS Y FEEDBACKS */
+.hint-box { 
+  background: #fffbeb; border: 2px dashed #facc15; color: #854d0e;
+  padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.9rem; 
+}
+.feedback-box { padding: 12px; border-radius: 10px; margin-top: 10px; font-weight: bold; text-align: center; animation: fadeIn 0.3s; }
+.correct { background: #dcfce7; color: #166534; border: 2px solid #22c55e; }
+.incorrect { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

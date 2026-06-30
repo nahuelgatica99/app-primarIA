@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Aprendizaje Interactiva</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-container">
+    <div id="hud">
+        <span id="hud-left">Puntos: <span id="points">0</span></span>
+        <span id="timer-cont" style="visibility: hidden;">⏳ <span id="timer">15:00</span></span> 
+        <span id="hud-right">Rango: <span id="rank">Novato 🐣</span></span>
+    </div>
+
+    <div id="screen">
+        <h2 id="title">Cargando Plataforma...</h2>
+        <div id="display-area"></div>
+        <div id="help-area"></div>
+    </div>
+
+    <div id="controls">
+        <div id="action-buttons"></div>
+        <button id="btn-back-contextual" onclick="volverAtras()" class="btn-nav"> Volver</button>
+    </div>
+</div>
+
+<audio id="sfx-win" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+
+<script src="datos.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
