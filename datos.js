@@ -1470,6 +1470,433 @@ const CONTENIDOS_EDUCATIVOS = {
 }
       }
     },
+    "ingles": {
+      materia: "Inglés Técnico",
+      color: "#4f46e5",
+      trimestres: {
+        "Q1": { guia: [], glosario: [], simulacro: [] },
+        "Q2": {
+          guia: [
+            {
+              titulo: "Lección 1: Pasado Simple - Verbos Regulares",
+              texto: "El <b>Past Simple</b> (Pasado Simple) se usa para hablar de acciones que ya terminaron en el pasado. Para los <b>verbos regulares</b>, la regla general es agregarle <b>-ed</b> al final del verbo.<br><br><b>Reglas de Ortografía importantes para niños:</b><br>1. Regla general: Solo agregamos -ed. Ejemplo: <i>walk</i> (caminar) -> <i>walked</i>.<br>2. Si el verbo ya termina con la letra -e: Solo agregamos la -d. Ejemplo: <i>like</i> (gustar) -> <i>liked</i>.<br>3. Si termina en Consonante + Y: Cambiamos la 'y' por una 'i' latina y agregamos -ed. Ejemplo: <i>study</i> (estudiar) -> <i>studied</i>.<br>4. Si es un verbo cortito y termina en Consonante-Vocal-Consonante (CVC): Duplicamos la última letra antes de poner -ed. Ejemplo: <i>stop</i> (parar) -> <i>stopped</i>.<br><br><b>Forma Negativa:</b> Usamos el secreto <b>did not</b> o su versión corta <b>didn't</b>. ¡Ojo! Cuando ponemos <i>didn't</i>, el verbo vuelve a su forma normal (pierde el -ed). Ejemplo: <i>I didn't watch TV</i> (Yo no miré tele).<br><br><b>Preguntas:</b> Empezamos la pregunta con <b>Did</b>, y el verbo también se queda en su forma normal. Ejemplo: <i>Did you play?</i> (¿Vos jugaste?).",
+              resumen_corto: "Se usa para acciones terminadas. Los verbos regulares suman '-ed'. En negativo usamos 'didn't' y en pregunta 'Did' con el verbo normal.",
+              preguntaValidacion: {
+                q: "Si queremos decir 'Yo estudié inglés ayer', ¿cuál es la forma correcta del verbo 'study'?",
+                a: ["studyed", "studied", "studying"],
+                c: 1
+              }
+            },
+            {
+              titulo: "Lección 2: Pasado Simple - Verbos Irregulares",
+              texto: "Los <b>Irregular Verbs</b> (Verbos Irregulares) son rebeldes: ¡no siguen la regla del -ed! Cambian de forma por completo cuando los pasamos al pasado y hay que aprenderlos de memoria jugando y practicando.<br><br><b>Los ejemplos más usados por niños:</b><br>- <i>go</i> (ir) -> se transforma en <b>went</b><br>- <i>eat</i> (comer) -> se transforma en <b>ate</b><br>- <i>see</i> (ver) -> se transforma en <b>saw</b><br>- <i>write</i> (escribir) -> se transforma en <b>wrote</b><br>- <i>buy</i> (comprar) -> se transforma en <b>bought</b><br><br><b>¡Súper Truco Secreto!:</b> Las formas de Negativo (<b>didn't</b>) y Pregunta (<b>Did</b>) funcionan EXACTAMENTE IGUAL que con los verbos regulares. Esto significa que el verbo rebelde se asusta y vuelve a su forma normal.<br><br>Ejemplo Afirmativo: <i>He went to the park</i> (Él fue al parque).<br>Ejemplo Negativo: <i>He <b>didn't go</b> to the park</i> (Él no fue al parque). ¡Vuelve a ser 'go'!",
+              resumen_corto: "Los verbos irregulares cambian por completo en afirmativo. Pero en las negaciones (didn't) y preguntas (Did) vuelven a su forma normal.",
+              preguntaValidacion: {
+                q: "¿Cómo se dice correctamente en negativo 'Ella no comió pizza'?",
+                a: ["She didn't ate pizza.", "She didn't eat pizza.", "She not eat pizza."],
+                c: 1
+              }
+            },
+            {
+              titulo: "Lección 3: Pasado Continuo - Acciones en Progreso",
+              texto: "El <b>Past Continuous</b> (Pasado Continuo) se usa para describir acciones que estaban ocurriendo (en progreso o en desarrollo) en un momento específico del pasado. Imagina que es como ponerle pausa a una película en el pasado para ver qué estaba haciendo el personaje.<br><br><b>¿Cómo se arma?:</b> Usamos el verbo del pasado (<b>was</b> o <b>were</b>) + un verbo con la terminación <b>-ing</b> (que significa -ando o -endo).<br><br><b>¿Cuándo usar Was y cuándo Were?</b><br>- Usamos <b>Was</b> con: <i>I, he, she, it</i> (Personas singulares). Ejemplo: <i>She was reading</i> (Ella estaba leyendo).<br>- Usamos <b>Were</b> con: <i>you, we, they</i> (Personas en plural). Ejemplo: <i>They were playing</i> (Ellos estaban jugando).<br><br><b>Negativo:</b> Ponemos <i>wasn't</i> o <i>weren't</i>. Ejemplo: <i>We weren't sleeping</i> (No estábamos durmiendo).<br><b>Pregunta:</b> Cambiamos el orden al inicio. Ejemplo: <i>Was he cooking?</i> (¿Él estaba cocinando?).",
+              resumen_corto: "Muestra una acción que se estaba haciendo en el pasado. Se arma con 'was/were' más el verbo terminado en '-ing'.",
+              preguntaValidacion: {
+                q: "Para decir 'Nosotros estábamos jugando', ¿cuál se usa?",
+                a: ["We was playing", "We were playing", "We playing"],
+                c: 1
+              }
+            },
+            {
+              titulo: "Lección 4: Combinando Pasados (Interrupciones)",
+              texto: "Muchas veces usamos el Pasado Simple y el Pasado Continuo juntos en la misma oración. Esto sirve para contar que una acción larga que se estaba haciendo en el pasado fue **interrumpida** por una acción cortita de repente.<br><br><b>Nuestras dos palabras mágicas conectoras son:</b><br><br>1. <b>WHEN (Cuando):</b> Por lo general, va seguido por el Pasado Simple (la acción cortita que interrumpe).<br>Ejemplo: <i>I was watching TV <b>when</b> the phone rang.</i> (Yo estaba mirando tele cuando el teléfono sonó). Mirar tele era la acción larga; que suene el teléfono fue la interrupción cortita.<br><br>2. <b>WHILE (Mientras):</b> Por lo general, va seguido por el Pasado Continuo (la acción larga que tomaba tiempo).<br>Ejemplo: <i><b>While</b> I was studying, my cat jumped into my bed.</i> (Mientras yo estaba estudiando, mi gato saltó a mi cama).",
+              resumen_corto: "El Pasado Continuo es la acción larga de fondo y el Pasado Simple es la acción corta que la interrumpe. Usamos 'when' y 'while'.",
+              preguntaValidacion: {
+                q: "Completa la idea: 'Mientras mi mamá estaba cocinando, mi papá ___ a casa'.",
+                a: ["came (llegó)", "was coming (estaba llegando)", "comes (llega)"],
+                c: 0
+              }
+            }
+          ],
+          glosario: [
+            { termino: "Action in progress", def: "Una acción en progreso. Significa que la actividad se estaba realizando de forma continua en ese momento." },
+            { termino: "Auxiliary Verb", def: "Verbo auxiliar. Un verbo ayudante (como 'did', 'was', 'were') que sirve para armar los negativos y las preguntas." },
+            { termino: "Base Form", def: "Forma base. El verbo en su estado natural e infinitivo, sin agregarle ninguna letra ni tiempo (ejemplo: 'play')." },
+            { termino: "Completed Action", def: "Acción terminada. Un evento que empezó y finalizó por completo en el pasado." },
+            { termino: "Consonant", def: "Consonante. Cualquier letra del abecedario que no sea una vocal (ejemplo: b, c, d, f, g, z)." },
+            { termino: "Irregular Verb", def: "Verbo irregular. Un verbo rebelde que cambia su forma por completo en el pasado afirmativo sin usar -ed." },
+            { termino: "Regular Verb", def: "Verbo regular. Un verbo obediente que sigue la regla estándar de sumar -ed o -d en el pasado." },
+            { termino: "Short Action", def: "Acción corta. Una acción repentina en pasado simple que ocurre en un instante e interrumpe a otra." },
+            { termino: "Suffix", def: "Sufijo. Una combinación de letras que se pegan al final de una palabra, como '-ed' o '-ing'." },
+            { termino: "Time Expression", def: "Expresión de tiempo. Palabras que te indican exactamente cuándo ocurrió la acción (ejemplo: 'yesterday' significa ayer)." },
+            { termino: "When", def: "Significa 'Cuando'. Por lo general introduce la acción corta que interrumpe en pasado simple." },
+            { termino: "While", def: "Significa 'Mientras'. Introduce la acción larga y continua en pasado continuo." }
+          ],
+          simulacro: [
+            {
+              pregunta: "1. Yesterday, I ___ (play) football with my friends in the park.",
+              opciones: ["played", "playyed", "plays"],
+              correcta: 0,
+              pista: "Este es un verbo regular común. Sigue la regla general y agrégale '-ed' al final."
+            },
+            {
+              pregunta: "2. She ___ (study) all night for the English exam last Tuesday.",
+              opciones: ["studyed", "studying", "studied"],
+              correcta: 2,
+              pista: "Cuando el verbo termina en consonante + 'y', cambiamos la 'y' por la 'i' latina antes del '-ed'."
+            },
+            {
+              pregunta: "3. They ___ (not watch) TV yesterday evening.",
+              opciones: ["don't watch", "didn't watched", "didn't watch"],
+              correcta: 2,
+              pista: "Para negar en el pasado usamos 'didn't' y el verbo tiene que quedarse en su forma normal."
+            },
+            {
+              pregunta: "4. ___ you clean your bedroom last weekend?",
+              opciones: ["Did", "Were", "Do"],
+              correcta: 0,
+              pista: "Para empezar una pregunta en pasado simple sobre una acción terminada usamos el auxiliar 'Did'."
+            },
+            {
+              pregunta: "5. Last year, my family ___ (go) to Bariloche for our holidays.",
+              opciones: ["goed", "went", "gone"],
+              correcta: 1,
+              pista: "'Go' es un verbo irregular muy rebelde. Su forma en pasado cambia por completo a una palabra con 'w'."
+            },
+            {
+              pregunta: "6. We ___ (see) a massive whale in the ocean during our trip.",
+              opciones: ["saw", "seed", "seen"],
+              correcta: 0,
+              pista: "'See' es un verbo irregular. Su pasado es una palabra cortita de tres letras que empieza con 's'."
+            },
+            {
+              pregunta: "7. He ___ (have) a terrible headache yesterday morning.",
+              opciones: ["haved", "has", "had"],
+              correcta: 2,
+              pista: "El pasado del verbo irregular 'have' es muy corto y termina con la letra 'd'."
+            },
+            {
+              pregunta: "8. At 8 o'clock last night, she ___ (read) a fascinating novel.",
+              opciones: ["was reading", "were reading", "readed"],
+              correcta: 0,
+              pista: "A una hora exacta, la acción estaba ocurriendo. Como es 'she' (singular), usamos 'was' + verbo con '-ing'."
+            },
+            {
+              pregunta: "9. The boys ___ (play) video games when the electrical power went out.",
+              opciones: ["was playing", "were playing", "played"],
+              correcta: 1,
+              pista: "'The boys' son ellos (plural). En el pasado continuo para el plural usamos 'were'."
+            },
+            {
+              pregunta: "10. I ___ (not sleep) when you texted me at midnight.",
+              opciones: ["wasn't sleeping", "weren't sleeping", "didn't slept"],
+              correcta: 0,
+              pista: "Para decir 'Yo no estaba...', usamos el negativo de was, que es 'wasn't', seguido de '-ing'."
+            },
+            {
+              pregunta: "11. ___ they listening to the teacher when she explained the project?",
+              opciones: ["Did", "Was", "Were"],
+              correcta: 2,
+              pista: "Es una pregunta en pasado continuo para 'they' (ellos). Debes empezar con 'Were'."
+            },
+            {
+              pregunta: "12. I was doing my homework when my mother ___ (arrive) home.",
+              opciones: ["was arriving", "arrived", "arrivee"],
+              correcta: 1,
+              pista: "La acción larga se corta porque mamá llegó. La interrupción cortita va en pasado simple (con '-ed')."
+            },
+            {
+              pregunta: "13. While they ___ (cook) dinner, the fire alarm started making a loud noise.",
+              opciones: ["were cooking", "was cooking", "cooked"],
+              correcta: 0,
+              pista: "La palabra 'While' significa 'Mientras'. Te avisa que viene la acción larga en pasado continuo."
+            },
+            {
+              pregunta: "14. The yellow car ___ (stop) suddenly at the red traffic light.",
+              opciones: ["stoped", "stopped", "was stopping"],
+              correcta: 1,
+              pista: "'Stop' es consonante-vocal-consonante. ¡Duplica la última letra antes de poner el '-ed'!"
+            },
+            {
+              pregunta: "15. She ___ (write) a beautiful poem for her mother's birthday.",
+              opciones: ["writed", "wrote", "written"],
+              correcta: 1,
+              pista: "'Write' es irregular. Su pasado cambia la letra 'i' por una 'o'."
+            },
+            {
+              pregunta: "16. My uncle ___ (buy) a brand new laptop last Friday afternoon.",
+              opciones: ["bought", "buyed", "boughted"],
+              correcta: 0,
+              pista: "El pasado de 'buy' (comprar) es irregular y termina con la forma difícil '-ought'."
+            },
+            {
+              pregunta: "17. We ___ (swim) in the cold river for two hours yesterday.",
+              opciones: ["swammed", "swam", "swimming"],
+              correcta: 1,
+              pista: "El verbo irregular 'swim' cambia su vocal interna de 'i' a 'a' en el pasado simple."
+            },
+            {
+              pregunta: "18. He didn't ___ (like) the horror movie at all.",
+              opciones: ["liked", "liking", "like"],
+              correcta: 2,
+              pista: "¡Alerta! Ya está puesto el ayudante 'didn't', así que el verbo tiene que volver a estar normal y limpio."
+            },
+            {
+              pregunta: "19. Where ___ you go for your last summer vacation?",
+              opciones: ["were", "did", "was"],
+              correcta: 1,
+              pista: "Es una pregunta sobre un viaje que ya terminó. Necesitamos el ayudante de preguntas del pasado: 'did'."
+            },
+            {
+              pregunta: "20. The neighbour's dog ___ (bark) continuously all night long.",
+              opciones: ["was barking", "were barking", "barkeded"],
+              correcta: 0,
+              pista: El perro es un animal singular ('it'). Le corresponde usar 'was' más el verbo con '-ing'."
+            },
+            {
+              pregunta: "21. We were walking down the street when it suddenly ___ (start) to pour rain.",
+              opciones: ["starting", "started", "was starting"],
+              correcta: 1,
+              pista: "Empezó a llover de golpe. Esa interrupción corta requiere el pasado simple regular con '-ed'."
+            },
+            {
+              pregunta: "22. I found my lost keys while I ___ (clean) up the messy living room.",
+              opciones: ["was cleaning", "were cleaning", "cleaned"],
+              correcta: 0,
+              pista: "Después de 'while' (mientras) va la acción larga en desarrollo: yo ('I') estaba limpiando."
+            },
+            {
+              pregunta: "23. They ___ (eat) a delicious pepperoni pizza at the Italian restaurant.",
+              opciones: ["eated", "ate", "eating"],
+              correcta: 1,
+              pista: "'Eat' es irregular. Su pasado se escribe moviendo las letras para formar 'ate'."
+            },
+            {
+              pregunta: "24. The thirsty cat ___ (drink) all the milk from its small bowl.",
+              opciones: ["drank", "drinked", "drunk"],
+              correcta: 0,
+              pista: "El pasado del verbo 'drink' cambia la letra 'i' por una 'a'."
+            },
+            {
+              pregunta: "25. She ___ (run) incredibly fast and won the school gold medal.",
+              opciones: ["runned", "running", "ran"],
+              correcta: 2,
+              pista: "El pasado del verbo irregular 'run' (correr) se escribe con una 'a' intermedia."
+            },
+            {
+              pregunta: "26. I ___ (lose) my favourite English textbook at school yesterday.",
+              opciones: ["losed", "lost", "loose"],
+              correcta: 1,
+              pista: "El pasado del verbo irregular 'lose' (perder) es una palabra cortita de 4 letras que termina en 't'."
+            },
+            {
+              pregunta: "27. Our school team ___ (win) the final football tournament match.",
+              opciones: ["won", "winned", "winning"],
+              correcta: 0,
+              pista: "El pasado del verbo irregular 'win' (ganar) cambia la letra 'i' por una 'o'."
+            },
+            {
+              pregunta: "28. He ___ (not watch) the documentary when the telephone rang.",
+              opciones: ["wasn't watching", "weren't watching", "didn't watching"],
+              correcta: 0,
+              pista: "Él ('he') no estaba realizando esa acción larga de mirar la tele. Usamos 'wasn't' + '-ing'."
+            },
+            {
+              pregunta: "29. What ___ you doing at exactly 9 o'clock last night?",
+              opciones: ["was", "did", "were"],
+              correcta: 2,
+              pista: "En preguntas de pasado continuo para la persona 'you', siempre usamos 'were'."
+            },
+            {
+              pregunta: "30. They ___ (visit) their grandparents living in Mar del Plata last month.",
+              opciones: ["visited", "visitted", "visiting"],
+              correcta: 0,
+              pista: "'Visit' es un verbo regular común. Solo agrégale '-ed' al final sin duplicar nada."
+            },
+            {
+              pregunta: "31. The ballerina ___ (dance) beautifully during the school festival.",
+              opciones: ["danced", "danceed", "was dance"],
+              correcta: 0,
+              pista: "Como 'dance' ya termina con la letra 'e', solo debemos sumarle una letra 'd' al final."
+            },
+            {
+              pregunta: "32. The passenger train ___ (arrive) precisely on time last night.",
+              opciones: ["arrived", "arriving", "arriveed"],
+              correcta: 0,
+              pista: "El verbo regular 'arrive' termina en 'e'. Solo agrégale la letra 'd' para pasarlo al pasado."
+            },
+            {
+              pregunta: "33. He ___ (speak) perfect English during his presentation.",
+              opciones: ["speaked", "spoke", "spoken"],
+              correcta: 1,
+              pista: "'Speak' es irregular. Su pasado cambia por completo y se transforma en 'spoke'."
+            },
+            {
+              pregunta: "34. The children ___ (sing) a wonderful song together in the choir.",
+              opciones: ["singed", "sung", "sang"],
+              correcta: 2,
+              pista: "El pasado del verbo irregular 'sing' (cantar) se escribe cambiando la 'i' por una 'a'."
+            },
+            {
+              pregunta: "35. I totally ___ (forget) to bring my science homework project today.",
+              opciones: ["forgot", "forgetted", "forgat"],
+              correcta: 0,
+              pista: "El verbo irregular 'forget' cambia su letra 'e' por una 'o' en el pasado simple."
+            },
+            {
+              pregunta: "36. The generous teacher ___ (give) us some extra points for participation.",
+              opciones: ["gived", "gave", "given"],
+              correcta: 1,
+              pista: "El pasado simple del verbo irregular 'give' (dar) cambia su vocal interna por una 'a'."
+            },
+            {
+              pregunta: "37. We already ___ (know) all the correct answers to the test.",
+              opciones: ["knew", "knowed", "known"],
+              correcta: 0,
+              pista: "El verbo irregular 'know' (saber) cambia su letra 'o' por una 'e' en el pasado."
+            },
+            {
+              pregunta: "38. The telephone rang loudly while I ___ (take) a relaxing shower.",
+              opciones: ["took", "was taking", "were taking"],
+              correcta: 1,
+              pista: "La palabra 'while' indica una acción larga continua. Como es 'I', lleva 'was' + '-ing'."
+            },
+            {
+              pregunta: "39. Did you ___ (see) the beautiful rainbow in the sky earlier?",
+              opciones: ["saw", "see", "seeing"],
+              correcta: 1,
+              pista: "Como la pregunta ya empieza con el ayudante 'Did', el verbo debe volver a su forma base normal."
+            },
+            {
+              pregunta: "40. He was ___ (run) quickly in the playground when he tripped and fell.",
+              opciones: ["running", "runing", "runned"],
+              correcta: 0,
+              pista: "En pasado continuo, al verbo corto 'run' (CVC) se le duplica la 'n' antes del '-ing'."
+            },
+            {
+              pregunta: "41. She was ___ (make) a delicious chocolate cake for my birthday party.",
+              opciones: ["maked", "making", "makeing"],
+              correcta: 1,
+              pista: "Cuando agregamos '-ing', los verbos que terminan con una 'e' muda pierden esa letra."
+            },
+            {
+              pregunta: "42. I didn't ___ (know) that you were waiting outside in the cold.",
+              opciones: ["knew", "know", "knowing"],
+              correcta: 1,
+              pista: "En las oraciones negativas con 'didn't', el verbo principal siempre se queda en su forma base limpia."
+            },
+            {
+              pregunta: "43. They traveled to London exactly three years ___.",
+              opciones: ["ago", "last", "before"],
+              correcta: 0,
+              pista: "La palabra que se pone al final para decir cuánto tiempo atrás ocurrió algo es 'ago' (atrás)."
+            },
+            {
+              pregunta: "44. A small colourful bird ___ (fly) directly into the classroom window.",
+              opciones: ["flied", "flew", "flown"],
+              correcta: 1,
+              pista: "'Fly' (volar) es un verbo irregular. Su forma pasada se escribe 'flew'."
+            },
+            {
+              pregunta: "45. The clumsy boy ___ (break) his new reading glasses yesterday afternoon.",
+              opciones: ["broke", "breaked", "broken"],
+              correcta: 1,
+              pista: "'Break' es irregular. Su pasado cambia a una palabra que termina en 'e' muda: 'broke'."
+            },
+            {
+              pregunta: "46. Our school director ___ (teach) us a historical lesson last Friday.",
+              opciones: ["teached", "taught", "taughted"],
+              correcta: 1,
+              pista: "El verbo 'teach' (enseñar) es irregular y su forma pasada es larga y difícil: 'taught'."
+            },
+            {
+              pregunta: "47. We ___ (spend) all our pocket money on sweets at the local shop.",
+              opciones: ["spended", "spent", "spending"],
+              correcta: 1,
+              pista: "El pasado del verbo irregular 'spend' cambia su última letra 'd' por una 't'."
+            },
+            {
+              pregunta: "48. We ___ not paying attention when the guide pointed at the ancient map.",
+              opciones: ["were", "was", "did"],
+              correcta: 0,
+              pista: "Estamos en pasado continuo con la persona plural 'We'. Le corresponde usar 'were'."
+            },
+            {
+              pregunta: "49. When the teacher walked into the room, the students ___ (talk) loudly.",
+              opciones: ["talked", "were talking", "was talking"],
+              correcta: 1,
+              pista: "Los alumnos estaban realizando una acción larga y ruidosa cuando entró el profesor. Usá pasado continuo."
+            },
+            {
+              pregunta: "50. He ___ (not help) me carry the heavy box upstairs yesterday.",
+              opciones: ["didn't helped", "didn't help", "wasn't help"],
+              correcta: 1,
+              pista: "Para negar en pasado simple regular, combinamos 'didn't' con el verbo en infinitivo normal."
+            },
+            {
+              pregunta: "51. I ___ (lose) my favorite pen last Monday.",
+              opciones: ["lost", "losed", "losen"],
+              correcta: 0,
+              pista: "El pasado del verbo irregular 'lose' cambia la letra final por una 't'."
+            },
+            {
+              pregunta: "52. What time ___ you arrive at the cinema yesterday?",
+              opciones: ["did", "were", "was"],
+              correcta: 0,
+              pista: "Para preguntar la hora exacta en que ocurrió una acción terminada, usamos el auxiliar 'did'."
+            },
+            {
+              pregunta: "53. My sister ___ (cry) when she fell off her bicycle.",
+              opciones: ["cried", "cryed", "was crying"],
+              correcta: 0,
+              pista: "'Cry' termina en consonante + 'y'. Cambiá la 'y' por la 'i' latina antes de agregar '-ed'."
+            },
+            {
+              pregunta: "54. While the teacher was speaking, the kids ___ (listen) carefully.",
+              opciones: ["were listening", "was listening", "listened"],
+              correcta: 0,
+              pista: "Es una acción en paralelo y continua en el pasado. Los chicos ('kids' es plural) estaban escuchando."
+            },
+            {
+              pregunta: "55. The dog ___ (bite) the ball and ran into the garden.",
+              opciones: ["bited", "bit", "bitten"],
+              correcta: 1,
+              pista: "El pasado del verbo irregular 'bite' (morder) es una palabra muy cortita: 'bit'."
+            },
+            {
+              pregunta: "56. I ___ (try) to finish my homework before dinner.",
+              opciones: ["tryed", "tried", "was trying"],
+              correcta: 1,
+              pista: "El verbo regular 'try' termina en consonante + 'y'. Cambiá la letra 'y' por 'i' antes del '-ed'."
+            },
+            {
+              pregunta: "57. Did your father ___ (drive) you to school this morning?",
+              opciones: ["drive", "drove", "driven"],
+              correcta: 0,
+              pista: "Ya pusiste el ayudante de preguntas 'Did', así que el verbo vuelve a su forma base normal."
+            },
+            {
+              pregunta: "58. We ___ (have) lunch when the lights went out.",
+              opciones: ["were having", "was having", "had"],
+              correcta: 0,
+              pista: "Estábamos realizando la acción larga de almorzar en plural. Usamos 'were' + verbo con '-ing'."
+            },
+            {
+              pregunta: "59. She ___ (plan) a secret birthday party for her best friend.",
+              opciones: ["planed", "planned", "was plan"],
+              correcta: 1,
+              pista: "'Plan' termina en Consonante-Vowel-Consonant. ¡Duplicá la 'n' antes de colocar '-ed'!"
+            },
+            {
+              pregunta: "60. Suddenly, the train ___ (stop) and everybody looked out the window.",
+              opciones: ["stopped", "stoped", "was stopping"],
+              correcta: 0,
+              pista: "Una acción repentina en el pasado. Duplicá la letra 'p' y agregá '-ed' para este verbo regular."
+            }
+          ]
+        }
+      }
+    },
     "naturales": {
       materia: "Ciencias Naturales",
       color: "#16a34a",
