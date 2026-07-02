@@ -1651,7 +1651,7 @@ const CONTENIDOS_EDUCATIVOS = {
               pregunta: "20. The neighbour's dog ___ (bark) continuously all night long.",
               opciones: ["was barking", "were barking", "barkeded"],
               correcta: 0,
-              pista: El perro es un animal singular ('it'). Le corresponde usar 'was' más el verbo con '-ing'."
+              pista: "El perro es un animal singular ('it'). Le corresponde usar 'was' más el verbo con '-ing'."
             },
             {
               pregunta: "21. We were walking down the street when it suddenly ___ (start) to pour rain.",
