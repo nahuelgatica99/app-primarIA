@@ -2,17 +2,37 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Aprendizaje Interactiva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Plataforma de Aprendizaje Interactiva - Modo Arcade</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- TOAST NOTIFICACIÓN DE LOGROS -->
+<div id="toast-logro" class="toast-logro" style="display:none;">
+    <span id="toast-icono">🏆</span>
+    <div class="toast-texto">
+        <b id="toast-titulo">¡Logro Desbloqueado!</b>
+        <span id="toast-desc">Descripción del logro</span>
+    </div>
+</div>
+
 <div id="game-container">
     <div id="hud">
-        <span id="hud-left">Puntos: <span id="points">0</span></span>
-        <span id="timer-cont" style="visibility: hidden;">⏳ <span id="timer">15:00</span></span> 
-        <span id="hud-right">Rango: <span id="rank">Novato 🐣</span></span>
+        <div id="hud-top-row">
+            <div style="display:flex; align-items:center; gap:6px;">
+                <span id="hud-player" class="hud-player-tag" onclick="abrirSelectorJugador()" title="Cambiar Jugador">
+                    🎮 <span id="player-name">ENZO</span>
+                </span>
+                <button id="btn-medallas" class="btn-medallas" onclick="abrirModalMedallas()" title="Ver Medallas">🎖️</button>
+                <button id="btn-logout" class="btn-logout" onclick="cerrarSesion()" title="Cerrar Sesión">🚪 Salir</button>
+            </div>
+            <span id="hud-level-badge" class="hud-level-tag">Nv. <span id="player-level">1</span> 🐣</span>
+        </div>
+        <div id="hud-bottom-row">
+            <span id="hud-left">Puntos: <span id="points">0</span> ⭐ (<span id="total-xp">0</span> XP)</span>
+            <span id="timer-cont" style="visibility: hidden;">⏳ <span id="timer">15:00</span></span>
+        </div>
     </div>
 
     <div id="screen">
@@ -23,11 +43,33 @@
 
     <div id="controls">
         <div id="action-buttons"></div>
-        <button id="btn-back-contextual" onclick="volverAtras()" class="btn-nav"> Volver</button>
+        <button id="btn-back-contextual" onclick="volverAtras()" class="btn-nav">🔙 Volver</button>
     </div>
 </div>
 
-<audio id="sfx-win" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+<!-- MODAL SELECTOR DE JUGADORES ARCADE -->
+<div id="modal-jugador" class="modal-arcade" style="display:none;">
+    <div class="modal-arcade-content">
+        <h3>👾 PERFIL DE JUGADOR ARCADE</h3>
+        <p style="font-size:0.9rem; color:#64748b; margin-top:-5px;">¿Quién está jugando ahora?</p>
+        <div id="lista-jugadores" class="lista-jugadores"></div>
+        <div class="nuevo-jugador-form">
+            <input type="text" id="input-nuevo-jugador" maxlength="12" placeholder="Escribe tu nombre..." onkeydown="if(event.key==='Enter') agregarNuevoJugador()">
+            <button class="btn-action" style="flex:0 0 auto; padding:8px 15px;" onclick="agregarNuevoJugador()">➕ Crear</button>
+        </div>
+        <button class="btn-nav" style="margin-top:15px;" onclick="cerrarSelectorJugador()">¡A Jugar! 🚀</button>
+    </div>
+</div>
+
+<!-- MODAL ÁLBUM DE MEDALLAS -->
+<div id="modal-medallas" class="modal-arcade" style="display:none;">
+    <div class="modal-arcade-content" style="max-width:500px;">
+        <h3>🎖️ ÁLBUM DE MEDALLAS Y LOGROS</h3>
+        <p style="font-size:0.9rem; color:#64748b; margin-top:-5px;">Logros desbloqueados por <b id="medallas-jugador">ENZO</b></p>
+        <div id="lista-medallas" class="galeria-medallas"></div>
+        <button class="btn-nav" style="margin-top:15px;" onclick="cerrarModalMedallas()">¡Genial! 🚀</button>
+    </div>
+</div>
 
 <script src="datos.js"></script>
 <script src="script.js"></script>

@@ -1,75 +1,149 @@
-# Plataforma Educativa Interactiva - Central de Aprendizaje Global
+# 🎓 PrimarIA — Plataforma Educativa Interactiva (Modo Arcade Gamer)
 
-¡Bienvenido al repositorio oficial de la **Plataforma Educativa Interactiva**! Esta aplicación web responsiva, accesible y modular ha sido desarrollada utilizando tecnologías web nativas para asistir a estudiantes de educación primaria. El sistema transforma los contenidos curriculares tradicionales en una experiencia inmersiva de autoaprendizaje mediante la combinación de audiolibros interactivos, diccionarios reactivos en tiempo real y simulacros de examen gamificados con persistencia de datos local.
+¡Bienvenido a **PrimarIA**! Una plataforma web educativa, modular, responsiva y accesible diseñada especialmente para estudiantes de educación primaria (focalizada actualmente en **6to Grado**).
 
----
-
-## 🎯 Objetivos de la Plataforma
-
-1. **Fomentar la Autonomía Estudiantil:** Proporcionar un entorno educativo controlado donde el alumno explore los conceptos conceptuales a su propio ritmo sin depender de supervisión constante.
-2. **Garantizar la Accesibilidad Universal:** Implementar soporte de lectura por voz nativa para asistir de forma efectiva a estudiantes con dificultades visuales, dislexia o diferentes ritmos de apropiación de la lectura.
-3. **Validación Conceptual Inmediata:** Intercalar la lectura pasiva con retos prácticos directos (mini-preguntas) para asentar la retención de datos antes de avanzar a nuevos bloques teóricos.
-4. **Mitigar la Ansiedad Frente a Exámenes:** Utilizar dinámicas lúdicas de gamificación (puntos, récords históricos e insignias de rango) para que las evaluaciones contra reloj sean vistas como un mecanismo de autosuperación y no de castigo.
+El sistema transforma el estudio tradicional y la preparación para exámenes en una experiencia inmersiva, interactiva y lúdica a través de **audiolibros guiados**, **tarjetas de memorización 3D (Flashcards)**, **diccionarios reactivos** y **simulacros de examen arcade** con efectos de sonido retro generados 100% offline.
 
 ---
 
-## 🗺️ Sistema de Navegación y Flujo de la App
+## 🌟 Características Principales
 
-La aplicación está gobernada en su totalidad por una arquitectura de **Máquina de Estados de Capas** en el frontend. En lugar de realizar recargas de página o redirecciones HTTP clásicas, el ciclo de vida de la interfaz se controla mediante la variable global `capaActual` y el método centralizador de renderizado `cambiarCapa(nuevaCapa)`.
-
-### Mapeo Exhaustivo de Capas de Interfaz:
-* **`seleccion-grado`:** Pantalla raíz de bienvenida. Presenta los niveles escolares disponibles en el sistema.
-* **`seleccion-trimestre`:** Filtra el recorrido del año lectivo tras seleccionar un grado, dividiendo la carga en bloques pedagógicos estándar (`Q1` para Primer Trimestre, `Q2` para Segundo Trimestre).
-* **`menu-enfoque`:** El panel de control central (Hub) de la materia y trimestre seleccionados. Expone los accesos dinámicos hacia los cuatro modos de estudio disponibles.
-* **`guia-aprendizaje`:** Interfaz de lectura interactiva equipada con controles de reproducción de audiolibro por párrafos y desafíos de validación rápida.
-* **`biblioteca`:** Consola de visualización de resúmenes sintéticos limpios extraídos directamente de la base de datos de lecciones.
-* **`glosario`:** Panel de consulta terminológica provisto de un motor de búsqueda instantáneo reactivo al tecleo del usuario.
-* **`simulacro-menu`:** Antesala de evaluación que muestra las reglas del examen, las estadísticas de puntuación máxima y el historial cronológico de intentos guardados.
-* **`simulacro`:** Entorno de examen adaptativo contra reloj de opción múltiple, con renderizado de preguntas, cronómetro dinámico y despliegue de pistas pedagógicas.
-
-### Sistema de Retorno Inteligente y Contextual (`volverAtras()`)
-El control de navegación de retorno ejecuta una limpieza y validación de estado rigurosa antes de alterar la capa visual:
-1. **Cancelación de Audio:** Invoca inmediatamente `window.speechSynthesis.cancel()` y setea el estado global `estadoAudio = "detenido"` para evitar que la lectura de voz continúe reproduciéndose en segundo plano si el usuario abandona una lección.
-2. **Navegación Condicional:** * Si `capaActual === "seleccion-trimestre"`, purga el almacenamiento de sesión ejecutando `localStorage.removeItem("grado")`, inicializa `gradoSeleccionado = null` y redirige a `renderSeleccionGrado()`.
-   * Si `capaActual === "menu-enfoque"`, devuelve al alumno a la selección de trimestres escolares (`irAPantallaTrimestre()`).
-   * Si la capa actual pertenece a un módulo de estudio (`guia-aprendizaje`, `biblioteca`, `glosario`, `simulacro-menu`), restablece la vista al panel principal del trimestre.
-3. **Protocolo de Seguridad en Exámenes:** Si el alumno activa el retorno mientras realiza una evaluación activa (`capaActual === "simulacro"`), la función detiene el flujo de salida de inmediato e invoca un cuadro de confirmación nativo. Esto previene de forma absoluta la pérdida accidental del tiempo invertido y del progreso de la prueba por clics involuntarios.
+1. **Autonomía y Autoaprendizaje:** El alumno explora, lee, escucha y se auto-evalúa a su propio ritmo sin depender de supervisión constante.
+2. **Accesibilidad Universal con Audiolibro (TTS):** Integración nativa con la **Web Speech API** que permite la lectura fonética de lecciones completas en español para alumnos con dificultades de lectura, dislexia o fatiga visual.
+3. **Efectos de Sonido Retro Offline (Web Audio API):** Generador sintético de sonido en tiempo real sin requerir archivos `.mp3` ni conexión a internet (aciertos, errores, fanfarrias de nivel, giros de tarjetas y clics).
+4. **Gamificación Integral:**
+   - **Perfiles de Jugador:** Múltiples perfiles (Enzo y amigos) con avatares personalizados.
+   - **Puntos & Niveles:** Sistema de experiencia (+XP), niveles de maestría y rangos dinámicos (Novato, Explorador, Erudito, Maestro, Leyenda).
+   - **Medallero y Logros:** Desbloqueo de insignias especiales con notificaciones flotantes (*Toast Notifications*).
+   - **Salón de la Fama (Leaderboard):** Tabla de récords históricos locales y sincronización opcional con la nube.
+5. **Retroalimentación Pedagógica Inmediata:** Cada pregunta de simulacro cuenta con pistas orientativas y explicaciones pedagógicas que se despliegan automáticamente al responder para fijar el aprendizaje en el acto.
+6. **Zero Dependencies (Sin Dependencias Externas):** 100% HTML5, CSS3 y JavaScript moderno nativo. No requiere `npm`, `node`, ni servidores backend. Funciona directamente abriendo `index.html` en cualquier navegador moderno o alojado en GitHub Pages.
 
 ---
 
-## 🕹️ Modos de Uso de la Plataforma
+## 📚 Mapa Curricular Completo (6to Grado)
 
-### 1. Guía de Aprendizaje Interactiva y Audiolibro
-Presenta las lecciones teóricas mapeadas dinámicamente. Integra la **Web Speech API** mediante el constructor `SpeechSynthesisUtterance`. Los algoritmos del controlador filtran las voces disponibles en el sistema operativo del cliente para priorizar voces en español nativo (`es-AR`, `es-ES`, o voces sintéticas avanzadas como `Microsoft Tomasa`). El usuario dispone de controles en pantalla para reproducir, pausar, reanudar y detener la lectura fonética del texto en prosa. Para avanzar o consolidar la lección, cada tema incluye una pregunta obligatoria basada en el contenido leído.
+La plataforma cuenta con un árbol académico exhaustivo estructurado en `datos.js`:
 
-### 2. Consultar Biblioteca (Resúmenes Rápidos)
-Diseñado para técnicas de repaso fluido y estudio de fijación. Esta interfaz extrae selectivamente la propiedad `resumen_corto` de cada una de las lecciones del bloque correspondiente, omitiendo los textos extensos y las preguntas de validación para entregar una hoja de ruta conceptual compacta e ideal para memorización de directrices fundamentales.
+### 🔬 Ciencias Naturales
+* **1er Trimestre (Q1): La Vida, la Célula y los Sistemas del Cuerpo Humano**
+  - **7 Lecciones:** Niveles de organización biológica, La Célula vegetal y animal, El Sistema Digestivo, El Sistema Circulatorio y la Sangre, El Sistema Respiratorio, El Sistema Excretor, El Sistema Reproductor Humano.
+  - **Glosario:** 30 términos científicos clave.
+  - **Simulacro:** 100 preguntas de opción múltiple pedagógicas con pistas y explicaciones.
+* **2do Trimestre (Q2): Ecosistemas, Tramas Tróficas y Adaptaciones**
+  - **7 Lecciones:** Ecosistemas y Factores Bióticos/Abióticos, Productores y Fotosíntesis, Consumidores y Descomponedores, Cadenas y Redes Tróficas, Relaciones Interespecíficas (Mutualismo, Parasitismo, etc.), Adaptaciones Morfológicas y Fisiológicas, Impacto Humano y Conservación.
+  - **Glosario:** 30 términos científicos clave.
+  - **Simulacro:** 70 preguntas pedagógicas con pistas y explicaciones.
+* **3er Trimestre (Q3): Pubertad, Reproducción Humana y Salud Sexual**
+  - **7 Lecciones:** Pubertad y Adolescencia (cambios corporales y emocionales), Hormonas Sexuales (Testosterona, Estrógenos, Progesterona), Sistema Reproductor Masculino, Sistema Reproductor Femenino, Gametos y Ciclo Menstrual (fecundación, ovulación y regla), Embarazo y Parto (cigoto, embrión y feto), Salud Sexual y Prevención de ITS (uso de preservativo e higiene).
+  - **Glosario:** 30 términos científicos clave.
+  - **Simulacro:** 70 preguntas pedagógicas con pistas y explicaciones.
 
-### 3. Diccionario con Buscador Dinámico
-El glosario actúa como una base terminológica indexada. El campo de búsqueda implementa un capturador de eventos en tiempo real a través de la propiedad `oninput`. Cada vez que el estudiante presiona una tecla, el sistema ejecuta de manera inmediata un filtro predictivo sobre el arreglo de términos, actualizando el árbol de elementos en pantalla sin demoras ni necesidad de recargar la vista o presionar un botón de confirmación.
+---
 
-### 4. Simulacro de Examen Contra Reloj
-Inicia una evaluación formal estructurada a partir del banco de preguntas del trimestre. El sistema cuenta con un motor de temporizador regresivo configurado a 30 minutos (1800 segundos) gestionado mediante `setInterval`. El componente gráfico del reloj posee reactividad cromática: al cruzar el umbral crítico de los 5 minutos restantes (300 segundos), altera sus estilos CSS dinámicamente cambiando a color rojo con animaciones de parpadeo visual para entrenar al alumno en la gestión del tiempo. Cada pregunta incluye la posibilidad de desplegar un campo de orientación técnica (Pista) que ayuda al razonamiento deductivo sin dar la respuesta directamente.
+### 🌍 Ciencias Sociales
+* **1er Trimestre (Q1): Ambientes, Recursos Naturales y Riesgos**
+  - **6 Lecciones:** Ambientes y Recursos Naturales, Tipos de Recursos (Renovables y No Renovables), Actores Sociales y el Rol del Estado, Problemas Ambientales Locales y Globales, Amenazas Naturales Internas y Atmosféricas, Vulnerabilidad Social frente a Desastres.
+  - **Glosario:** 22 términos históricos y geográficos.
+  - **Simulacro:** 100 preguntas pedagógicas.
+* **2do Trimestre (Q2): La Construcción del Estado Nacional Argentino (1852-1880)**
+  - **10 Lecciones:** La Confederación Argentina y el Estado de Buenos Aires, La Constitución Nacional de 1853, La Batalla de Pavón y la Unificación Política, Las Presidencias Históricas (Mitre, Sarmiento, Avellaneda), La Ley 1420 de Educación Común, Organización Institucional, Fronteras y Campañas Militares, La Integración Territorial de 1880.
+  - **Glosario:** 21 términos históricos.
+  - **Simulacro:** 100 preguntas pedagógicas.
+* **3er Trimestre (Q3): La Argentina Agroexportadora y la Era Industrial (1880-1914)**
+  - **7 Lecciones:** La Revolución Industrial (1ra y 2da Fase: vapor, carbón, electricidad y petróleo), Revolución en Transportes y Comunicaciones (barcos a vapor con cámaras frigoríficas, telégrafo submarino), La División Internacional del Trabajo (países centrales vs. periféricos), El Modelo Agroexportador en Argentina ("El Granero del Mundo", tierras pampeanas, capitales británicos y mano de obra), La Expansión Ferroviaria (red radial de 28.000 km convergiendo en puertos), Primeras Industrias y Desigualdades Regionales (frigoríficos, molinos harineros, La Forestal vs. economías del interior), La Gran Inmigración Ultramarina (Ley Avellaneda de 1876, Hotel de Inmigrantes, conventillos, tango y lunfardo).
+  - **Glosario:** 30 términos económicos e históricos.
+  - **Simulacro:** 70 preguntas pedagógicas con pistas y explicaciones.
 
 ---
 
-## 🏆 Sistema de Puntajes, Récords y Rangos
-
-El progreso académico está completamente gamificado para incentivar la asiduidad del alumno y medir de manera objetiva su evolución a lo largo del tiempo.
-
-### 1. Reglas de Asignación de Puntos
-* **Mini-Preguntas de Validación (Guías):** Responder correctamente el desafío al final de una lectura teórica otorga **+5 puntos** directos al marcador global de la sesión. Si la respuesta es incorrecta, la plataforma lo notifica visualmente pero no aplica penalizaciones negativas, promoviendo la experimentación y eliminando el miedo al error.
-* **Preguntas de Simulacro (Examen):** Resolver un reactivo de opción múltiple dentro del simulacro formal contra reloj premia al alumno con **+10 puntos**.
-
-### 2. Persistencia en Almacenamiento Local (`localStorage`)
-La aplicación no requiere bases de datos en servidores externos, utilizando en su lugar la persistencia del navegador del cliente mediante la API `localStorage`:
-* **Puntaje Máximo Histórico (`maxScore`):** Registra de forma indeleble el récord de puntos más alto alcanzado por el usuario. Al concluir con éxito una evaluación, si el puntaje final supera la marca grabada, el sistema actualiza la clave en el almacenamiento local y activa un flujo visual de felicitación por nuevo récord establecido.
-* **Historial Analítico de Intentos (`historial`):** Cada vez que un simulacro se da por terminado (ya sea por completar todas las preguntas, agotamiento del tiempo o abandono confirmado), el sistema genera un objeto con la marca de tiempo exacta (`fecha`, `hora`), el total de `puntos` obtenidos, la `duracion` consumida formateada en minutos/segundos y el identificador del `bloque` curricular evaluado. Este arreglo se guarda en formato JSON (`JSON.stringify`) y se renderiza en orden cronológico inverso (los intentos más recientes en la parte superior) dentro del menú del simulacro.
-
-### 3. Clasificación de Rangos Dinámicos
-La plataforma evalúa constantemente el puntaje global acumulado por el estudiante durante su sesión de uso activa para determinar y renderizar su nivel de rango de manera dinámica en el HUD superior:
-* 🐣 **Novato (0 a 19 puntos):** Rango base otorgado al ingresar a la plataforma o al realizar exploraciones iniciales.
-* 🗺️ **Explorador (20 a 39 puntos):** El estudiante demuestra consistencia, habiendo superado con éxito múltiples lecciones y lecturas de control.
-* 🎓 **Erudito (40 puntos o más):** Distinción de honor máxima reservada para los estudiantes que completan simulacros formales con alta efectividad y demuestran un dominio completo de los bloques de estudio.
+### 🇬🇧 Inglés Técnico
+* **2do Trimestre (Q2): Past Simple & Technical Grammar**
+  - **Lecciones:** Reglas de verbos regulares (`-ed`, ortografía, `didn't`, `Did`), verbos irregulares comunes, oraciones afirmativas, negativas e interrogativas.
+  - **Glosario & Simulacros:** Ejercicios de aplicación y vocabulario interactivo.
 
 ---
+
+## 🕹️ Modos de Juego y Estudio
+
+Dentro de cada materia y trimestre, el alumno dispone de 4 accesos principales en el Hub:
+
+```
+[ HUB DE ESTUDIO ]
+  ├── 📘 Guía Interactiva (Lectura + Audiolibro TTS + Reto de Validación)
+  ├── 📚 Biblioteca Resumen (Tarjetas conceptuales rápidas)
+  ├── 🔍 Glosario & Flashcards 3D (Buscador reactivo + Tarjetas giratorias)
+  └── 🎯 Simulacro Arcade (Examen cronometrado con pistas y feedback)
+```
+
+### 1. 📘 Guía Interactiva con Audiolibro
+- Prosa clara y estructurada con tipografía legible y colores estimulantes.
+- Botones multimedia: **Reproducir ▶️**, **Pausar ⏸️**, **Reanudar ⏯️** y **Detener ⏹️**.
+- Mini-pregunta de validación obligatoria al pie de página (+5 XP al acertar) para desbloquear la asimilación del tema.
+
+### 2. 📚 Biblioteca de Resúmenes
+- Diseñada para el repaso rápido minutos antes de entrar a clase o rendir la prueba.
+- Extrae la síntesis conceptual de cada lección (`resumen_corto`), permitiendo una lectura panorámica rápida.
+
+### 3. 🔍 Glosario & Flashcards 3D
+- **Modo Lista:** Diccionario indexado con buscador instantáneo (`oninput`). Filtra al teclear sin recargar la pantalla.
+- **Modo Flashcards 3D:** Tarjetas interactivas con animación de giro espacial en CSS (`preserve-3d`). Permite marcar tarjetas como *Dominadas* o *Por Repasar*, premiando la memorización con XP.
+
+### 4. 🎯 Simulacro Arcade y Desafíos Contra Reloj
+- **Longitud Configurable:** El alumno elige realizar sesiones rápidas de 5 preguntas, rondas estándar de 10 preguntas, simulacros completos de 20 preguntas o el banco entero.
+- **Reloj de Tensión:** Temporizador con cuenta regresiva. Al cruzar los últimos minutos, entra en estado de alerta visual con parpadeo rojo.
+- **Pistas Didácticas:** Botón de ayuda que despliega orientaciones deductivas sin revelar la solución.
+- **Feedback Inmediato:** Tras responder, se muestra una tarjeta explicativa en verde (acierto) o ámbar (error) detallando el porqué de la respuesta correcta.
+- **Podio y Récords:** Cálculo de porcentaje de aciertos, medallas ganadas, rachas y guardado en el Salón de la Fama.
+
+---
+
+## 🧱 Arquitectura de Software y Código
+
+El proyecto sigue una arquitectura de **Single-Page Application (SPA)** nativa y modular:
+
+```
+APP PrimarIA/
+├── index.html       # Estructura del DOM, HUD superior, modales y contenedores reactivos
+├── style.css        # Sistema de diseño gamer arcade, variables CSS, animaciones 3D y diseño responsive
+├── script.js        # Motor principal: máquina de estados (cambiarCapa), audio sintetizado, lógica de perfiles y simulacros
+├── datos.js         # Base de datos global unificada (CONTENIDOS_EDUCATIVOS) con esquemas de lecciones, glosarios y simulacros
+├── README.md        # Documentación general para usuarios y desarrolladores
+└── CLAUDE.md        # Guía técnica y directrices de desarrollo para asistentes de Inteligencia Artificial
+```
+
+### Máquina de Estados de Capas (`cambiarCapa(nuevaCapa)`)
+La navegación entre vistas no realiza recargas de página. El ciclo de vida visual se controla mediante la variable global `capaActual` y el método `cambiarCapa()`:
+- `seleccion-perfil` / `seleccion-materia`
+- `seleccion-trimestre` (detecta dinámicamente si existe `Q1`, `Q2` o `Q3` y habilita botones)
+- `menu-enfoque` (Hub de la materia)
+- `guia-aprendizaje`
+- `biblioteca`
+- `glosario`
+- `simulacro-menu`
+- `simulacro`
+- `simulacro-resultado`
+
+### Protocolo de Seguridad en Exámenes (`volverAtras()`)
+Si el usuario intenta volver atrás durante un simulacro activo, la plataforma intercepta la acción y solicita confirmación para evitar la pérdida involuntaria del progreso o del tiempo restante. Asimismo, al cambiar de vista, cancela inmediatamente cualquier reproducción en curso de la voz sintetizada (`speechSynthesis.cancel()`).
+
+---
+
+## 🚀 Cómo Ejecutar y Desplegar
+
+### Ejecución Local
+1. Clona o descarga la carpeta del proyecto.
+2. Haz doble clic en `index.html` para abrirlo en cualquier navegador (Chrome, Edge, Firefox, Safari).
+3. ¡No requiere instalar Node.js, dependencias ni servidores locales!
+
+### Despliegue en GitHub Pages
+1. Sube el repositorio a GitHub.
+2. Dirígete a **Settings ➡️ Pages**.
+3. Selecciona la rama `main` (o `master`) y la carpeta `/ (root)`.
+4. ¡Tu enlace web de PrimarIA estará activo en segundos para usarlo desde cualquier tablet, computadora o celular!
+
+---
+
+## 👨‍💻 Autoría y Propósito
+
+Desarrollado con dedicación para acompañar el aprendizaje de **Enzo** en 6to Grado, promoviendo el entusiasmo por el conocimiento, la curiosidad científica, el rigor histórico y el disfrute del estudio escolar.
