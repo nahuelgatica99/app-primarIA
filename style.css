@@ -1,53 +1,106 @@
-/* PALETA GAMER RELAJANTE - REDUCCIÓN DE FATIGA COGNITIVA */
+/* =============================================================================
+   PRIMAR-IA ARCADE — SISTEMA DE ESTILOS GAMER Y DISEÑO RESPONSIVE
+   Diseñado especialmente para Enzo y estudiantes de primaria.
+   Alta legibilidad, cero fatiga cognitiva, estética gamer retro-moderna.
+   ============================================================================= */
+
 :root {
-  --fondo-pantalla: #0f172a;    /* Pizarra oscuro gamer suave para la vista */
-  --fondo-app: #f8fafc;         /* Fondo de tarjeta limpio y claro */
-  --texto-oscuro: #0f172a;      /* Texto nítido de alta legibilidad */
-  --rojo-principal: #ef4444;    /* Acento arcade vibrante */
-  --rojo-oscuro: #1e293b;       /* Títulos y contraste alto */
-  --rojo-claro: #f87171;        
-  --azul-arcade: #3b82f6;
-  --verde-arcade: #22c55e;
+  /* PALETA GAMER ARCADE MODERNA (MODO OSCURO / CONSOLA) */
+  --fondo-pantalla: #070b14;        /* Fondo exterior cósmico profundo */
+  --fondo-app: #0f172a;             /* Chasis gamer de la consola */
+  --fondo-screen: #0a0f1d;          /* Pantalla interior arcade */
+  --fondo-card: #162032;            /* Tarjetas elevadas de la interfaz */
+  --fondo-card-hover: #1e293b;      /* Estado hover en tarjetas */
+  --borde-gamer: #25334d;           /* Bordes sutiles de la interfaz */
+  --borde-glow: rgba(56, 189, 248, 0.35);
+
+  /* TIPOGRAFÍA Y CONTRASTE */
+  --texto-principal: #f8fafc;       /* Blanco nítido máxima legibilidad */
+  --texto-secundario: #94a3b8;      /* Gris suave para subtítulos */
+  --texto-oscuro: #f8fafc;          /* Alias para compatibilidad con script.js */
+  --rojo-oscuro: #f1f5f9;           /* Alias para títulos en script.js */
+
+  /* ACENTOS NEÓN ARCADE */
+  --rojo-principal: #f43f5e;        /* Neón Rubí (Sociales / Warnings) */
+  --rojo-claro: #fb7185;
+  --azul-arcade: #38bdf8;           /* Cian Eléctrico (Inglés / Acciones / Focus) */
+  --verde-arcade: #22c55e;          /* Verde 1-UP (Naturales / Éxito) */
+  --amarillo-arcade: #fbbf24;       /* Oro Recompensa (XP / Medallas / Récord) */
+  --purpura-arcade: #818cf8;        /* Púrpura Espacial (Hero / Niveles) */
+  --gris-bloqueado: #475569;
   --blanco: #ffffff;
-  --gris-bloqueado: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body { 
-  background: var(--fondo-pantalla); 
+  background: radial-gradient(ellipse at 50% 0%, #1e1b4b 0%, #070b14 80%);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
   display: flex; 
   justify-content: center; 
   align-items: center; 
-  min-height: 100vh; 
-  margin: 0; 
-  color: var(--texto-oscuro); 
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  color: var(--texto-principal);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* =============================================================================
+   CHASIS GAMER PRINCIPAL (#game-container)
+   ============================================================================= */
 #game-container {
   background: var(--fondo-app);
   width: 100%;
-  max-width: 600px;
-  min-height: 550px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  padding: 20px;
+  max-width: 620px;
+  height: 94vh;
+  max-height: 880px;
+  min-height: 580px;
+  border-radius: 24px;
+  border: 2px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.85), 0 0 20px rgba(56, 189, 248, 0.15);
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
 
+/* RESPONSIVE MÓVIL TOTAL (CELULARES) */
+@media (max-width: 640px) {
+  #game-container {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    padding: 10px 12px;
+    box-shadow: none;
+  }
+}
+
+/* =============================================================================
+   HUD SUPERIOR (HEADS-UP DISPLAY)
+   ============================================================================= */
 #hud {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: var(--blanco);
-  padding: 10px 15px;
-  border-radius: 14px;
-  font-weight: bold;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  color: var(--rojo-oscuro);
-  margin-bottom: 12px;
+  gap: 6px;
+  background: var(--fondo-card);
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1.5px solid var(--borde-gamer);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  color: var(--texto-principal);
+  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
 #hud-top-row, #hud-bottom-row {
@@ -57,250 +110,426 @@ body {
 }
 
 .hud-player-tag {
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  padding: 4px 10px;
+  background: #1e293b;
+  border: 1.5px solid var(--azul-arcade);
+  padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #1e293b;
+  color: #f8fafc;
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .hud-player-tag:hover {
-  background: #e2e8f0;
-  border-color: #94a3b8;
-  transform: scale(1.03);
+  background: #25344d;
+  transform: scale(1.04);
 }
 
+.hud-level-tag {
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border: 1.5px solid var(--purpura-arcade);
+  color: #c7d2fe;
+  font-size: 0.82rem;
+  padding: 3px 10px;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(129, 140, 248, 0.3);
+}
+
+#hud-left {
+  font-size: 0.9rem;
+  color: var(--amarillo-arcade);
+  font-weight: bold;
+}
+
+#timer-cont {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #fca5a5;
+}
+
+/* =============================================================================
+   PANTALLA ARCADE (#screen) Y DISPLAY-AREA RESPONSIVO
+   ============================================================================= */
 #screen {
-  flex-grow: 1;
-  background: var(--blanco);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  flex: 1 1 auto;
+  min-height: 0;
+  background: var(--fondo-screen);
+  border: 1.5px solid var(--borde-gamer);
+  border-radius: 18px;
+  padding: 14px 14px 10px 14px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 #title {
   text-align: center;
-  color: var(--rojo-principal);
-  margin-top: 0;
-  font-size: 1.4rem;
+  color: #fde047;
+  text-shadow: 0 0 12px rgba(253, 224, 71, 0.4);
+  margin: 0 0 10px 0;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  border-bottom: 2px solid var(--fondo-app);
+  border-bottom: 1.5px solid var(--borde-gamer);
+  padding-bottom: 8px;
+  flex-shrink: 0;
+}
+
+/* display-area: Ocupa todo el alto disponible, scroll suave sin cortes */
+#display-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none !important;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
+}
+
+/* SCROLLBAR GAMER DELGADA */
+#display-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+#display-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#display-area::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+#display-area::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* =============================================================================
+   PANTALLA DE INICIO ARCADE Y HERO
+   ============================================================================= */
+.inicio-contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding-bottom: 10px;
 }
 
-#display-area {
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 340px;
-  padding-right: 5px;
-}
-
-/* NUEVOS COMPONENTES: SELECCIÓN DE GRADOS Y OPCIONES */
-.grid-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.card-option {
-  background: var(--blanco);
-  border: 3px solid var(--rojo-claro);
-  border-radius: 15px;
-  padding: 20px;
+.arcade-hero {
   text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--rojo-oscuro);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.card-option:hover:not(.disabled) {
-  transform: translateY(-3px);
-  background: var(--rojo-claro);
+  background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 50%, #0f172a 100%);
+  border: 1.5px solid rgba(168, 85, 247, 0.5);
   color: white;
-  border-color: var(--rojo-principal);
+  padding: 14px 12px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(30, 27, 75, 0.4), 0 0 15px rgba(168, 85, 247, 0.25);
 }
 
-.card-option.disabled {
-  background: #e2e8f0;
-  border-color: var(--gris-bloqueado);
-  color: var(--gris-bloqueado);
-  cursor: not-allowed;
-  opacity: 0.7;
+.arcade-hero h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  color: #fde047;
+  text-shadow: 0 0 14px rgba(253, 224, 71, 0.6);
 }
 
-/* BOTONES DE NAVEGACIÓN Y MENÚS */
-#controls {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.arcade-hero p {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #cbd5e1;
 }
 
-#action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.login-card {
+  background: var(--fondo-card);
+  border: 1.5px solid var(--borde-gamer);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  text-align: center;
 }
 
-.btn-nav, .btn-action {
+.login-input {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px;
-  font-size: 1rem;
+  font-size: 1.15rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  background: #0d1525;
+  border: 2px solid var(--azul-arcade);
+  color: #ffffff;
+  border-radius: 14px;
+  outline: none;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.login-input:focus {
+  border-color: #67e8f9;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5), inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.btn-enter-game {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  font-size: 1.1rem;
   font-weight: bold;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: background 0.2s;
-  text-align: center;
-}
-
-.btn-nav {
-  background: var(--rojo-principal);
-  color: white;
-}
-
-.btn-nav:hover {
-  background: var(--rojo-oscuro);
-}
-
-.btn-action {
-  background: #f1f5f9;
-  color: var(--texto-oscuro);
-  border: 2px solid #cbd5e1;
-}
-
-.btn-action:hover {
-  background: #e2e8f0;
-}
-
-/* COMPONENTES DEL LIBRO DIGITAL DE APRENDIZAJE */
-.libro-contenedor {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.libro-texto {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--texto-oscuro);
-  background: #fffbfa;
-  padding: 15px;
-  border-radius: 10px;
-  border-left: 5px solid var(--rojo-principal);
-}
-
-.audio-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
-  padding: 8px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.9rem;
-  align-self: flex-start;
-}
-
-.audio-control:hover {
-  background: #fde68a;
-}
-
-.validacion-box {
-  background: #f0fdf4;
-  border: 2px solid #bbf7d0;
-  border-radius: 12px;
-  padding: 15px;
-  margin-top: 15px;
-}
-
-/* ALERTAS Y FEEDBACKS */
-.hint-box { 
-  background: #fffbeb; border: 2px dashed #facc15; color: #854d0e;
-  padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.9rem; 
-}
-.feedback-box { padding: 12px; border-radius: 10px; margin-top: 10px; font-weight: bold; text-align: center; animation: fadeIn 0.3s; }
-.correct { background: #dcfce7; color: #166534; border: 2px solid #22c55e; }
-.incorrect { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-/* ESTILOS GAMER Y TEMPORIZADOR ARCADE */
-.timer-warning {
-  color: #dc2626 !important;
-  font-size: 1.15rem !important;
-  font-weight: 900 !important;
-  animation: arcadePulse 0.5s infinite alternate !important;
-  text-shadow: 0 0 10px rgba(220, 38, 38, 0.7);
-}
-
-@keyframes arcadePulse {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.12); opacity: 0.85; }
-}
-
-/* BOTÓN DE AUDIO ACCESIBLE */
-.btn-audio {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #fef3c7;
-  color: #92400e;
-  border: 2px solid #f59e0b;
-  padding: 10px 16px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #15803d, 0 6px 16px rgba(34, 197, 94, 0.4);
+  transition: all 0.15s ease;
   user-select: none;
 }
 
-.btn-audio:hover {
-  background: #fde68a;
+.btn-enter-game:hover {
+  background: linear-gradient(180deg, #2ecc71 0%, #1e824c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #15803d, 0 8px 20px rgba(34, 197, 94, 0.5);
+}
+
+.btn-enter-game:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #15803d, 0 3px 8px rgba(34, 197, 94, 0.3);
+}
+
+.recent-players-section {
+  margin-top: 12px;
+}
+
+.recent-players-label {
+  font-size: 0.82rem;
+  color: var(--texto-secundario);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.recent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.chip-jugador {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1e293b;
+  border: 1.5px solid #334155;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #e2e8f0;
+  font-size: 0.92rem;
+}
+
+.chip-jugador:hover {
+  background: #25344d;
+  border-color: var(--azul-arcade);
   transform: translateY(-2px);
 }
 
-.btn-audio:active {
-  transform: scale(0.96);
+.chip-jugador.activo {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: white;
+  border-color: #fca5a5;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
 }
 
-/* FEEDBACK VISUAL INMEDIATO EN OPCIONES DE EXAMEN */
+/* =============================================================================
+   SALÓN DE LA FAMA (LEADERBOARD PODIUM)
+   ============================================================================= */
+.leaderboard-card {
+  background: var(--fondo-card);
+  border: 1.5px solid #eab308;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.15);
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.leaderboard-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #fde047;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(253, 224, 71, 0.3);
+}
+
+.podium-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.podium-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #111a2c;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+  color: #f1f5f9;
+}
+
+.podium-item:hover {
+  transform: translateX(3px);
+}
+
+.podium-item.gold {
+  background: linear-gradient(90deg, rgba(234, 179, 8, 0.2) 0%, #1e293b 100%);
+  border-color: #facc15;
+  border-width: 1.5px;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+}
+
+.podium-item.silver {
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.2) 0%, #1e293b 100%);
+  border-color: #94a3b8;
+  border-width: 1.5px;
+}
+
+.podium-item.bronze {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.2) 0%, #1e293b 100%);
+  border-color: #fb923c;
+  border-width: 1.5px;
+}
+
+.podium-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.podium-medal {
+  font-size: 1.25rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.podium-name {
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.podium-meta {
+  font-size: 0.75rem;
+  color: var(--texto-secundario);
+}
+
+.podium-score {
+  font-weight: 900;
+  color: #fbbf24;
+  font-size: 1rem;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+}
+
+/* =============================================================================
+   TARJETAS DE SELECCIÓN (.card-option) Y GRID SELECTOR
+   ============================================================================= */
+.grid-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+  .grid-selector {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.card-option {
+  background: var(--fondo-card);
+  border: 2px solid var(--borde-gamer);
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--texto-principal);
+  box-shadow: 0 3px 0 #0b1120, 0 4px 10px rgba(0,0,0,0.25);
+  user-select: none;
+}
+
+.card-option:hover:not(.disabled) {
+  transform: translateY(-2px);
+  background: var(--fondo-card-hover);
+  border-color: var(--azul-arcade);
+  box-shadow: 0 5px 0 #0b1120, 0 8px 16px rgba(56, 189, 248, 0.25);
+}
+
+.card-option:active:not(.disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #0b1120;
+}
+
+.card-option.disabled {
+  background: #111827;
+  border-color: #1f2937;
+  color: var(--gris-bloqueado);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+/* FEEDBACK VISUAL EN OPCIONES DE EXAMEN */
 .card-option.correct {
-  background: #22c55e !important;
+  background: #166534 !important;
   color: white !important;
-  border-color: #15803d !important;
-  box-shadow: 0 0 14px rgba(34, 197, 94, 0.6) !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.6) !important;
   transform: scale(1.02);
 }
 
 .card-option.incorrect {
-  background: #ef4444 !important;
+  background: #991b1b !important;
   color: white !important;
-  border-color: #b91c1c !important;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.5) !important;
   animation: shake 0.4s ease;
 }
 
 .card-option.correct-answer {
-  background: #dcfce7 !important;
-  color: #166534 !important;
-  border: 3px dashed #22c55e !important;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  background: #0f241a !important;
+  color: #86efac !important;
+  border: 2px dashed #22c55e !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
 }
 
 @keyframes shake {
@@ -309,29 +538,433 @@ body {
   40%, 80% { transform: translateX(6px); }
 }
 
-/* MODAL SELECTOR DE JUGADORES ARCADE */
+/* =============================================================================
+   BOTONES DE CONTROL Y NAVEGACIÓN (#controls)
+   ============================================================================= */
+#controls {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-nav, .btn-action {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.btn-nav {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 0 #991b1b, 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-nav:hover {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #991b1b, 0 6px 14px rgba(239, 68, 68, 0.4);
+}
+
+.btn-nav:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #991b1b;
+}
+
+.btn-action {
+  background: var(--fondo-card);
+  color: var(--texto-principal);
+  border: 1.5px solid var(--borde-gamer);
+  box-shadow: 0 3px 0 #0b1120;
+}
+
+.btn-action:hover {
+  background: var(--fondo-card-hover);
+  border-color: var(--azul-arcade);
+}
+
+.btn-action:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #0b1120;
+}
+
+/* =============================================================================
+   MÓDULO: GUÍA INTERACTIVA Y AUDIOLIBRO
+   ============================================================================= */
+.libro-contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.libro-texto {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #f1f5f9;
+  background: #111a2c;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--borde-gamer);
+  border-left: 5px solid var(--azul-arcade);
+}
+
+.libro-texto b {
+  color: #fde047;
+}
+
+.btn-audio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 3px 0 #0369a1, 0 4px 10px rgba(56, 189, 248, 0.3);
+  user-select: none;
+}
+
+.btn-audio:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 #0369a1, 0 6px 14px rgba(56, 189, 248, 0.4);
+}
+
+.btn-audio:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #0369a1;
+}
+
+.audio-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e293b;
+  color: #fef08a;
+  border: 1px solid #facc15;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85rem;
+  align-self: flex-start;
+}
+
+.audio-control:hover {
+  background: #293548;
+}
+
+.validacion-box {
+  background: #0f241a;
+  border: 1.5px solid #22c55e;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 10px;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
+}
+
+.validacion-box h4 {
+  color: #86efac;
+}
+
+/* ALERTAS Y PISTAS */
+.hint-box { 
+  background: #2a210d;
+  border: 1.5px dashed #facc15;
+  color: #fef08a;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 0.9rem; 
+}
+
+.feedback-box {
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeIn 0.3s;
+}
+
+.feedback-box.correct {
+  background: #0f241a;
+  color: #86efac;
+  border: 1.5px solid #22c55e;
+}
+
+.feedback-box.incorrect {
+  background: #2a1215;
+  color: #fca5a5;
+  border: 1.5px solid #ef4444;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =============================================================================
+   MÓDULO: SIMULACROS ARCADE Y PROGRESO
+   ============================================================================= */
+.progress-container {
+  margin-bottom: 10px;
+  background: #111a2c;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--borde-gamer);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #1e293b;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8 0%, #22c55e 100%);
+  border-radius: 20px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+.selector-modos-box {
+  background: #111a2c;
+  border: 1.5px solid var(--borde-gamer);
+  border-radius: 16px;
+  padding: 14px;
+  margin: 12px 0;
+  text-align: left;
+}
+
+.selector-modos-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #f8fafc;
+  margin-bottom: 8px;
+}
+
+.selector-modos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.modo-btn {
+  background: #162032;
+  border: 1.5px solid var(--borde-gamer);
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  user-select: none;
+  color: #f8fafc;
+}
+
+.modo-btn:hover {
+  border-color: var(--azul-arcade);
+  background: #1e293b;
+  transform: translateY(-2px);
+}
+
+.modo-btn.activo {
+  border-color: var(--azul-arcade);
+  background: #1e3a5f;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.modo-btn .modo-titulo {
+  font-weight: bold;
+  font-size: 0.92rem;
+  color: #f8fafc;
+}
+
+.modo-btn .modo-sub {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.toggle-reloj-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #162032;
+  border: 1px solid var(--borde-gamer);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.btn-toggle-reloj {
+  background: #1e293b;
+  border: 1.5px solid var(--borde-gamer);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #cbd5e1;
+}
+
+.btn-toggle-reloj.activo {
+  background: #22c55e;
+  color: white;
+  border-color: #16a34a;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.timer-warning {
+  color: #ef4444 !important;
+  font-size: 1.15rem !important;
+  font-weight: 900 !important;
+  animation: arcadePulse 0.5s infinite alternate !important;
+  text-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+}
+
+@keyframes arcadePulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.12); opacity: 0.85; }
+}
+
+/* =============================================================================
+   TARJETAS FLASHCARD 3D EN EL GLOSARIO
+   ============================================================================= */
+.flashcard-wrapper {
+  perspective: 1000px;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.flashcard-card {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 18px;
+}
+
+.flashcard-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flashcard-front {
+  background: linear-gradient(135deg, #162032 0%, #1e293b 100%);
+  border: 2px solid var(--azul-arcade);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.2);
+}
+
+.flashcard-back {
+  background: linear-gradient(135deg, #0f241a 0%, #163826 100%);
+  border: 2px solid var(--verde-arcade);
+  transform: rotateY(180deg);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.2);
+}
+
+.flashcard-term {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--azul-arcade);
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.flashcard-def {
+  font-size: 1.05rem;
+  color: #f1f5f9;
+  line-height: 1.5;
+}
+
+.flashcard-hint {
+  font-size: 0.78rem;
+  color: var(--texto-secundario);
+  margin-top: 10px;
+}
+
+/* =============================================================================
+   MODALES ARCADE (JUGADOR Y MEDALLAS)
+   ============================================================================= */
 .modal-arcade {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
 }
 
 .modal-arcade-content {
-  background: var(--blanco);
+  background: #111a2c;
+  border: 1.5px solid var(--borde-gamer);
   width: 90%;
   max-width: 440px;
-  padding: 24px;
+  padding: 22px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  color: #f8fafc;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.2);
   animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -350,33 +983,6 @@ body {
   justify-content: center;
 }
 
-.chip-jugador {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  padding: 8px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #1e293b;
-  font-size: 0.95rem;
-}
-
-.chip-jugador:hover {
-  background: #e2e8f0;
-  transform: translateY(-2px);
-}
-
-.chip-jugador.activo {
-  background: var(--rojo-principal);
-  color: white;
-  border-color: var(--rojo-oscuro);
-  box-shadow: 0 3px 8px rgba(227, 66, 52, 0.4);
-}
-
 .nuevo-jugador-form {
   display: flex;
   gap: 8px;
@@ -386,385 +992,71 @@ body {
 .nuevo-jugador-form input {
   flex: 1;
   padding: 10px 14px;
-  border: 2px solid #cbd5e1;
+  border: 1.5px solid var(--borde-gamer);
+  background: #0d1525;
+  color: white;
   border-radius: 12px;
   font-size: 1rem;
   outline: none;
 }
 
 .nuevo-jugador-form input:focus {
-  border-color: var(--rojo-principal);
+  border-color: var(--azul-arcade);
 }
 
-/* RESPONSIVIDAD PARA CELULAR Y TABLET */
-@media (max-width: 640px) {
-  #game-container {
-    border-radius: 0;
-    min-height: 100vh;
-    padding: 12px;
-  }
-  .grid-selector {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  #title {
-    font-size: 1.15rem;
-  }
-  .card-option {
-    padding: 15px;
-    font-size: 1.05rem;
-  }
-  #display-area {
-    max-height: 50vh;
-  }
-}
-
-/* BOTÓN DE CERRAR SESIÓN EN HUD */
-.btn-logout {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.btn-logout:hover {
-  background: #fecaca;
-  transform: scale(1.05);
-}
-
-/* PANTALLA DE INICIO ARCADE Y SALÓN DE LA FAMA */
-.inicio-contenedor {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding-bottom: 10px;
-}
-
-.arcade-hero {
-  text-align: center;
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  color: white;
-  padding: 14px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(30, 27, 75, 0.25);
-}
-
-.arcade-hero h2 {
-  margin: 0;
-  font-size: 1.35rem;
-  letter-spacing: 1px;
-  color: #fde047;
-  text-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
-}
-
-.arcade-hero p {
-  margin: 4px 0 0 0;
-  font-size: 0.85rem;
-  color: #cbd5e1;
-}
-
-.login-card {
-  background: var(--blanco);
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  text-align: center;
-}
-
-.login-input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px;
-  font-size: 1.15rem;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  border: 3px solid var(--rojo-claro);
-  border-radius: 12px;
-  outline: none;
-  transition: border-color 0.2s;
-  letter-spacing: 1px;
-  color: var(--rojo-oscuro);
-}
-
-.login-input:focus {
-  border-color: var(--rojo-principal);
-  box-shadow: 0 0 10px rgba(227, 66, 52, 0.2);
-}
-
-.btn-enter-game {
-  width: 100%;
-  margin-top: 10px;
-  padding: 13px;
-  background: #22c55e;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
-  transition: all 0.2s ease;
-}
-
-.btn-enter-game:hover {
-  background: #16a34a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.5);
-}
-
-.btn-enter-game:active {
-  transform: scale(0.98);
-}
-
-.recent-players-section {
-  margin-top: 10px;
-}
-
-.recent-players-label {
-  font-size: 0.82rem;
-  color: #64748b;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.recent-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-/* SALÓN DE LA FAMA (LEADERBOARD) */
-.leaderboard-card {
-  background: #ffffff;
-  border: 2px solid #facc15;
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.15);
-}
-
-.leaderboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #fef08a;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
-}
-
-.leaderboard-title {
-  margin: 0;
-  font-size: 1.05rem;
-  color: #854d0e;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.podium-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.podium-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-  font-size: 0.9rem;
-  transition: transform 0.2s;
-}
-
-.podium-item:hover {
-  transform: translateX(3px);
-}
-
-.podium-item.gold {
-  background: #fef9c3;
-  border-color: #facc15;
-  border-width: 2px;
-}
-
-.podium-item.silver {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
-  border-width: 2px;
-}
-
-.podium-item.bronze {
-  background: #ffedd5;
-  border-color: #fdba74;
-  border-width: 2px;
-}
-
-.podium-left {
-  display: flex;
-  align-items: center;
+/* ÁLBUM DE MEDALLAS */
+.galeria-medallas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-}
-
-.podium-medal {
-  font-size: 1.25rem;
-  min-width: 24px;
-  text-align: center;
-}
-
-.podium-name {
-  font-weight: bold;
-  color: var(--texto-oscuro);
-}
-
-.podium-meta {
-  font-size: 0.75rem;
-  color: #64748b;
-}
-
-.podium-score {
-  font-weight: 900;
-  color: var(--rojo-principal);
-  font-size: 1rem;
-}
-
-/* BARRA DE PROGRESO GAMER DINÁMICA */
-.progress-container {
-  margin-bottom: 12px;
-  background: #f1f5f9;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-}
-
-.progress-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: #475569;
-  margin-bottom: 6px;
-}
-
-.progress-track {
-  width: 100%;
-  height: 10px;
-  background: #cbd5e1;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6 0%, #22c55e 100%);
-  border-radius: 20px;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
-}
-
-/* SELECTOR DE MODOS DE JUEGO (ANTESALA SIMULACRO) */
-.selector-modos-box {
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 12px;
-  margin: 12px 0;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 15px 0;
   text-align: left;
 }
 
-.selector-modos-label {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #1e293b;
-  margin-bottom: 8px;
+.medalla-card {
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid var(--borde-gamer);
+  background: #162032;
+  transition: all 0.2s;
 }
 
-.selector-modos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 10px;
+.medalla-card.desbloqueada {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.15), #162032);
+  border-color: #facc15;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
 }
 
-.modo-btn {
-  background: #ffffff;
-  border: 2px solid #cbd5e1;
-  border-radius: 12px;
-  padding: 10px 6px;
+.medalla-card.bloqueada {
+  background: #0d1525;
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.medalla-icono {
+  font-size: 2rem;
+  min-width: 36px;
   text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  user-select: none;
 }
 
-.modo-btn:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
-  transform: translateY(-2px);
+.medalla-info strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #f8fafc;
 }
 
-.modo-btn.activo {
-  border-color: #2563eb;
-  background: #dbeafe;
-  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+.medalla-info small {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.2;
 }
 
-.modo-btn .modo-titulo {
-  font-weight: bold;
-  font-size: 0.92rem;
-  color: #1e293b;
-}
-
-.modo-btn .modo-sub {
-  font-size: 0.72rem;
-  color: #64748b;
-}
-
-.toggle-reloj-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  padding: 10px 14px;
-  border-radius: 12px;
-}
-
-.btn-toggle-reloj {
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #334155;
-}
-
-.btn-toggle-reloj.activo {
-  background: #22c55e;
-  color: white;
-  border-color: #16a34a;
-  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
-}
-
-/* TOAST FLOTANTE DE LOGROS Y MEDALLAS */
+/* TOAST FLOTANTE DE LOGROS */
 .toast-logro {
   position: fixed;
   top: 20px;
@@ -778,7 +1070,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(250, 204, 21, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(250, 204, 21, 0.5);
   z-index: 2000;
   animation: slideDownToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -786,12 +1078,6 @@ body {
 @keyframes slideDownToast {
   from { top: -80px; opacity: 0; }
   to { top: 20px; opacity: 1; }
-}
-
-.toast-texto {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
 }
 
 .toast-texto b {
@@ -804,10 +1090,10 @@ body {
   color: #cbd5e1;
 }
 
-/* BOTONES Y ETIQUETAS EN EL HUD */
+/* BOTONES HUD */
 .btn-medallas {
-  background: #fef3c7;
-  border: 1px solid #f59e0b;
+  background: #2a210d;
+  border: 1px solid #facc15;
   border-radius: 14px;
   padding: 4px 8px;
   font-size: 0.85rem;
@@ -817,150 +1103,36 @@ body {
 
 .btn-medallas:hover {
   transform: scale(1.1);
-  background: #fde68a;
+  background: #3d3013;
 }
 
-.hud-level-tag {
-  background: #eff6ff;
-  border: 1.5px solid #3b82f6;
-  color: #1d4ed8;
+.btn-logout {
+  background: #2a1215;
+  color: #fca5a5;
+  border: 1px solid #ef4444;
   font-size: 0.8rem;
-  padding: 3px 8px;
-  border-radius: 12px;
   font-weight: bold;
-}
-
-/* GALERÍA DE MEDALLAS (ÁLBUM) */
-.galeria-medallas {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  max-height: 280px;
-  overflow-y: auto;
-  margin: 15px 0;
-  text-align: left;
-}
-
-.medalla-card {
-  border-radius: 12px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 2px solid #e2e8f0;
-  transition: all 0.2s;
-}
-
-.medalla-card.desbloqueada {
-  background: #fefce8;
-  border-color: #facc15;
-  box-shadow: 0 2px 6px rgba(250, 204, 21, 0.2);
-}
-
-.medalla-card.bloqueada {
-  background: #f8fafc;
-  opacity: 0.6;
-  filter: grayscale(1);
-}
-
-.medalla-icono {
-  font-size: 2rem;
-  min-width: 36px;
-  text-align: center;
-}
-
-.medalla-info strong {
-  display: block;
-  font-size: 0.9rem;
-  color: #1e293b;
-}
-
-.medalla-info small {
-  font-size: 0.75rem;
-  color: #64748b;
-  line-height: 1.2;
-}
-
-/* TARJETAS FLASHCARD 3D EN EL GLOSARIO */
-.flashcard-wrapper {
-  perspective: 1000px;
-  width: 100%;
-  margin: 12px 0;
-}
-
-.flashcard-card {
-  position: relative;
-  width: 100%;
-  min-height: 200px;
+  padding: 4px 8px;
+  border-radius: 14px;
   cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 16px;
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.flashcard-card.flipped {
-  transform: rotateY(180deg);
+.btn-logout:hover {
+  background: #3f181d;
+  transform: scale(1.05);
 }
 
-.flashcard-front, .flashcard-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 200px;
-  backface-visibility: hidden;
-  border-radius: 16px;
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.flashcard-front {
-  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
-  border: 3px solid #3b82f6;
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.15);
-}
-
-.flashcard-back {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 3px solid #22c55e;
-  transform: rotateY(180deg);
-  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.15);
-}
-
-.flashcard-term {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #1e3a8a;
-  margin-bottom: 8px;
-}
-
-.flashcard-def {
-  font-size: 1.05rem;
-  color: #14532d;
-  line-height: 1.45;
-}
-
-.flashcard-hint {
-  font-size: 0.78rem;
-  color: #64748b;
-  margin-top: 10px;
-}
-
-/* SELECTOR DE VELOCIDAD DE VOZ (TTS) */
+/* SELECTOR VELOCIDAD DE VOZ (TTS) */
 .speed-control-box {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #f1f5f9;
+  background: #111a2c;
   padding: 3px 6px;
   border-radius: 20px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--borde-gamer);
   margin-left: 8px;
   vertical-align: middle;
 }
@@ -973,12 +1145,12 @@ body {
   padding: 3px 7px;
   border-radius: 12px;
   cursor: pointer;
-  color: #64748b;
+  color: #94a3b8;
   transition: all 0.2s;
 }
 
 .speed-btn.activo {
-  background: #3b82f6;
-  color: white;
-  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.4);
+  background: var(--azul-arcade);
+  color: #070b14;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
 }
