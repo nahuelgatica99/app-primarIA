@@ -17,7 +17,8 @@ El sistema transforma el estudio tradicional y la preparación para exámenes en
    - **Medallero y Logros:** Desbloqueo de insignias especiales con notificaciones flotantes (*Toast Notifications*).
    - **Salón de la Fama (Leaderboard):** Tabla de récords históricos locales y sincronización opcional con la nube.
 5. **Retroalimentación Pedagógica Inmediata:** Cada pregunta de simulacro cuenta con pistas orientativas y explicaciones pedagógicas que se despliegan automáticamente al responder para fijar el aprendizaje en el acto.
-6. **Zero Dependencies (Sin Dependencias Externas):** 100% HTML5, CSS3 y JavaScript moderno nativo. No requiere `npm`, `node`, ni servidores backend. Funciona directamente abriendo `index.html` en cualquier navegador moderno o alojado en GitHub Pages.
+6. **Diseño Mobile-First & Estética Gamer Arcade (Dark Mode):** Interfaz inmersiva de alto impacto inspirada en consolas retro-modernas (estilo Nintendo Switch / Arcade cósmico), con fondo oscuro para evitar la fatiga visual, textos en blanco nítido (`#f8fafc`), botones táctiles 3D con relieve físico, podio del Salón de la Fama y adaptación al 100% del alto de pantalla de smartphones (`100dvh`) sin recortes arbitrarios.
+7. **Zero Dependencies (Sin Dependencias Externas):** 100% HTML5, CSS3 y JavaScript moderno nativo. No requiere `npm`, `node`, ni servidores backend. Funciona directamente abriendo `index.html` en cualquier navegador moderno o alojado en GitHub Pages.
 
 ---
 
@@ -115,9 +116,9 @@ El proyecto sigue una arquitectura de **Single-Page Application (SPA)** nativa y
 
 ```
 APP PrimarIA/
-├── index.html       # Estructura del DOM, HUD superior, modales y contenedores reactivos
-├── style.css        # Sistema de diseño gamer arcade, variables CSS, animaciones 3D y diseño responsive
-├── script.js        # Motor principal: máquina de estados (cambiarCapa), audio sintetizado, lógica de perfiles y simulacros
+├── index.html       # Estructura semántica del DOM, HUD gamer superior, modales arcade y marcos reactivos
+├── style.css        # Sistema Dark Gamer Arcade, variables temáticas por materia, arquitectura responsive 100dvh y animaciones 3D
+├── script.js        # Motor principal: máquina de estados (cambiarCapa), audio sintético, gestión inteligente de UI, perfiles y simulacros
 ├── datos.js         # Base de datos global unificada (CONTENIDOS_EDUCATIVOS) con esquemas de lecciones, glosarios y simulacros
 ├── README.md        # Documentación general para usuarios y desarrolladores
 └── CLAUDE.md        # Guía técnica y directrices de desarrollo para asistentes de Inteligencia Artificial

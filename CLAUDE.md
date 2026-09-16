@@ -9,7 +9,7 @@ Este documento sirve como directriz técnica y estándar de desarrollo para asis
 - **Nombre:** PrimarIA (Plataforma Educativa Interactiva - Modo Arcade Gamer).
 - **Destinatario Principal:** Enzo y estudiantes de nivel primario (actualmente cursando **6to Grado** en Argentina).
 - **Objetivo Pedagógico:** Ofrecer una plataforma web de estudio gamificada, accesible e interactiva que cubra los contenidos de las asignaturas escolares (**Ciencias Naturales**, **Ciencias Sociales** e **Inglés Técnico**) para preparar exámenes trimestrales sin frustración, mediante audiolibros interactivos, flashcards 3D, búsqueda terminológica instantánea y simulacros de examen con retroalimentación constructiva.
-- **Enfoque de Diseño:** Estética Gamer / Arcade accesible (inspirada en consolas retro y cyberpunk apto para niños), alto contraste, tipografías legibles, feedback audiovisual dinámico y celebraciones de logros (medallas, XP y fanfarrias).
+- **Enfoque de Diseño:** Estética Gamer / Arcade accesible (inspirada en consolas retro-modernas como Nintendo Switch y cyberpunk amigable para niños): modo oscuro de alto contraste (`#f8fafc` sobre fondo de chasis `#0f172a` y pantalla `#0a0f1d`), botones táctiles 3D con volumen físico, tipografías legibles anti-fatiga visual, feedback audiovisual dinámico (SFX sintéticos) y celebraciones de logros (medallas, XP, podio y fanfarrias).
 
 ---
 
@@ -17,7 +17,7 @@ Este documento sirve como directriz técnica y estándar de desarrollo para asis
 
 - **Tecnologías:** 100% Vanilla Web Nativo:
   - **HTML5:** Estructura semántica, HUD superior interactivo, modales y renderizado dinámico.
-  - **CSS3:** Variables CSS para temas por materia, Flexbox/Grid responsive, transformaciones espaciales 3D (`perspective`, `rotateY`, `backface-visibility`) y animaciones arcade.
+  - **CSS3:** Variables CSS para temas por materia y paleta arcade, diseño responsive con Dynamic Viewport (`100dvh`), Flexbox/Grid fluido para móviles y desktops, transformaciones espaciales 3D (`perspective`, `rotateY`, `backface-visibility`), botones táctiles 3D con relieve y animaciones arcade.
   - **JavaScript (ES6+):** Código cliente modular, gestión de estados, manipulación de DOM nativo.
 - **Dependencias Externas:** **CERO (0)** dependencias. No utiliza `npm`, `node`, `webpack`, `vite`, `React` ni librerías externas.
 - **Audio & Accesibilidad:**
@@ -48,7 +48,7 @@ APP PrimarIA/
   - Máquina de Estados: `cambiarCapa(nuevaCapa)`, `volverAtras()`, control de flujo.
   - Renderizadores de vistas: `renderSeleccionMateria`, `renderSeleccionTrimestre`, `renderMenuEnfoque`, `renderGuia`, `renderBiblioteca`, `renderGlosario`, `renderSimulacroMenu`, `renderPreguntaSimulacro`, etc.
   - Sistema de Gamificación: Perfiles, XP, niveles, rachas y medallas.
-* **`style.css`:** Define la apariencia global. Soporta variables temáticas dinámicas (`--rojo-principal`, `--verde-principal`, `--azul-principal`) para adaptar el color del HUD y botones según la materia seleccionada.
+* **`style.css`:** Define el sistema de diseño Dark Gamer Arcade global. Implementa el chasis de consola, variables temáticas dinámicas (`--azul-arcade`, `--verde-arcade`, `--rojo-principal`, `--amarillo-arcade`), botones táctiles 3D, modales, flashcards 3D y arquitectura responsive fluida `100dvh` para smartphones y computadoras sin recortes de pantalla.
 
 ---
 
@@ -158,6 +158,9 @@ Al modificar o expandir la plataforma, cualquier asistente de IA o colaborador d
    - Incluso si un trimestre aún no tiene contenidos, debe inicializarse como `{ guia: [], glosario: [], simulacro: [] }` para evitar errores de referencia `undefined`.
 7. **Tono Pedagógico:** Mantener un estilo motivador, respetuoso, riguroso pero accesible para un estudiante de 11-12 años en Argentina (ejemplos locales: La Forestal, Ferrocarril del Oeste, trenes a Retiro/Constitución, etc.).
 8. **Usuario Predeterminado:** El jugador activo y predeterminado es exclusivamente **ENZO**, manteniendo limpia la lista de jugadores y el Salón de la Fama de registros de prueba.
+9. **Arquitectura Responsive Mobile-First (Prohibición de `max-height` destructivos):** En dispositivos móviles, NUNCA aplicar límites rígidos como `max-height: 50vh` o valores fijos en píxeles a `#display-area` ni contenedores de contenido. Debe emplearse siempre `flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;` con `#game-container` en `100dvh` para garantizar que la interfaz se adapte perfectamente a cualquier pantalla sin dejar vacíos inferiores ni cortar tarjetas.
+10. **Preservación del Tema Dark Gamer Arcade de Alto Contraste:** No introducir fondos blancos planos (`#ffffff` / `#f8fafc`) en el chasis, pantalla, tarjetas o modales. La legibilidad se garantiza mediante texto claro nítido (`#f8fafc`, `#f1f5f9`) sobre fondos oscuros bien diferenciados (`#162032`, `#111a2c`, `#0a0f1d`), complementados con acentos luminosos y botones 3D con relieve.
+11. **Gestión Dinámica de Encabezados en Capas:** En la pantalla de inicio (`pantalla-inicio`), `#title` debe permanecer oculto para ceder protagonismo directo al banner marquee `🕹️ PRIMAR-IA ARCADE`. En las capas educativas subsiguientes, `#title` debe restablecerse automáticamente a `display: block`.
 
 ---
 

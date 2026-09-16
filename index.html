@@ -51,7 +51,7 @@
 <div id="modal-jugador" class="modal-arcade" style="display:none;">
     <div class="modal-arcade-content">
         <h3>👾 PERFIL DE JUGADOR ARCADE</h3>
-        <p style="font-size:0.9rem; color:#64748b; margin-top:-5px;">¿Quién está jugando ahora?</p>
+        <p style="font-size:0.9rem; color:var(--texto-secundario); margin-top:-5px;">¿Quién está jugando ahora?</p>
         <div id="lista-jugadores" class="lista-jugadores"></div>
         <div class="nuevo-jugador-form">
             <input type="text" id="input-nuevo-jugador" maxlength="12" placeholder="Escribe tu nombre..." onkeydown="if(event.key==='Enter') agregarNuevoJugador()">
@@ -65,7 +65,7 @@
 <div id="modal-medallas" class="modal-arcade" style="display:none;">
     <div class="modal-arcade-content" style="max-width:500px;">
         <h3>🎖️ ÁLBUM DE MEDALLAS Y LOGROS</h3>
-        <p style="font-size:0.9rem; color:#64748b; margin-top:-5px;">Logros desbloqueados por <b id="medallas-jugador">ENZO</b></p>
+        <p style="font-size:0.9rem; color:var(--texto-secundario); margin-top:-5px;">Logros desbloqueados por <b id="medallas-jugador">ENZO</b></p>
         <div id="lista-medallas" class="galeria-medallas"></div>
         <button class="btn-nav" style="margin-top:15px;" onclick="cerrarModalMedallas()">¡Genial! 🚀</button>
     </div>

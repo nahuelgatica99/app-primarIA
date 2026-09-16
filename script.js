@@ -114,10 +114,8 @@ const CONFIG_CLOUD = {
 
 // --- SALÓN DE LA FAMA (LEADERBOARD MULTIJUGADOR) ---
 const LeaderboardManager = {
-  claveLocal: 'arcade_leaderboard',
-  datosIniciales: [
-    { jugador: "ENZO", puntos: 280, materia: "Ciencias Sociales", fecha: "Hoy" }
-  ],
+  claveLocal: 'arcade_leaderboard_v2',
+  datosIniciales: [],
   obtenerUrl() {
     if (!CONFIG_CLOUD.url) return "";
     let u = CONFIG_CLOUD.url.trim();
@@ -131,11 +129,10 @@ const LeaderboardManager = {
       const guardados = localStorage.getItem(this.claveLocal);
       if (guardados) {
         let lista = JSON.parse(guardados);
-        lista = lista.filter(r => r.jugador !== 'NICO' && r.jugador !== 'SANTI' && r.jugador !== 'MATEO');
-        if (lista.length > 0) return lista;
+        if (Array.isArray(lista) && lista.length > 0) return lista;
       }
     } catch(e) {}
-    return [...this.datosIniciales];
+    return [];
   },
   guardarRecord(jugador, puntos, materia) {
     if (!jugador || puntos <= 0) return;
@@ -165,6 +162,9 @@ const LeaderboardManager = {
         const datosNube = await resp.json();
         if (Array.isArray(datosNube) && datosNube.length > 0) {
           localStorage.setItem(this.claveLocal, JSON.stringify(datosNube));
+          if (capaActual === 'pantalla-inicio') renderPantallaInicio();
+        } else if (datosNube === null || (Array.isArray(datosNube) && datosNube.length === 0)) {
+          localStorage.removeItem(this.claveLocal);
           if (capaActual === 'pantalla-inicio') renderPantallaInicio();
         }
       }
@@ -490,6 +490,9 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 
 // --- CONTROLADOR DE FLUJO PRINCIPAL ---
 window.onload = function() {
+  try {
+    localStorage.removeItem('arcade_leaderboard');
+  } catch(e) {}
   LeaderboardManager.sincronizarDesdeNube();
   renderPantallaInicio();
 };
@@ -497,12 +500,15 @@ window.onload = function() {
 function cambiarCapa(nuevaCapa) {
   capaActual = nuevaCapa;
   const hud = document.getElementById('hud');
+  const titleEl = document.getElementById('title');
   const timerCont = document.getElementById('timer-cont');
 
   if (nuevaCapa === 'pantalla-inicio') {
     if (hud) hud.style.display = 'none';
+    if (titleEl) titleEl.style.display = 'none';
   } else {
     if (hud) hud.style.display = 'flex';
+    if (titleEl) titleEl.style.display = 'block';
   }
 
   if (nuevaCapa === 'simulacro') {
@@ -537,28 +543,40 @@ function actualizarHUD() {
 // =============================================================================
 function renderPantallaInicio() {
   cambiarCapa("pantalla-inicio");
-  document.getElementById('title').innerText = "CENTRAL DE APRENDIZAJE GLOBAL";
+  const titleEl = document.getElementById('title');
+  if (titleEl) titleEl.style.display = 'none';
 
   const records = LeaderboardManager.obtenerRecords();
   const medals = ["🥇", "🥈", "🥉"];
   const medalClasses = ["gold", "silver", "bronze"];
 
-  const htmlRecords = records.map((r, idx) => {
-    const medalla = idx < 3 ? medals[idx] : `${idx + 1}°`;
-    const claseMedalla = idx < 3 ? medalClasses[idx] : "";
-    return `
-      <div class="podium-item ${claseMedalla}">
-        <div class="podium-left">
-          <span class="podium-medal">${medalla}</span>
-          <div>
-            <span class="podium-name">${r.jugador}</span>
-            <div class="podium-meta">${r.materia} • ${r.fecha}</div>
-          </div>
-        </div>
-        <span class="podium-score">${r.puntos} ⭐</span>
+  let htmlRecords = "";
+  if (!records || records.length === 0) {
+    htmlRecords = `
+      <div style="text-align:center; padding:18px 10px; color:var(--texto-secundario);">
+        <span style="font-size:2rem; display:block; margin-bottom:6px;">🏆</span>
+        <p style="margin:0; font-size:0.92rem; font-weight:bold; color:#f8fafc;">¡El Salón de la Fama está listo para estrenarse!</p>
+        <p style="margin:4px 0 0 0; font-size:0.8rem; color:#94a3b8;">Juega tu primer simulacro para conquistar el puesto #1 del podio.</p>
       </div>
     `;
-  }).join('');
+  } else {
+    htmlRecords = records.map((r, idx) => {
+      const medalla = idx < 3 ? medals[idx] : `${idx + 1}°`;
+      const claseMedalla = idx < 3 ? medalClasses[idx] : "";
+      return `
+        <div class="podium-item ${claseMedalla}">
+          <div class="podium-left">
+            <span class="podium-medal">${medalla}</span>
+            <div>
+              <span class="podium-name">${r.jugador}</span>
+              <div class="podium-meta">${r.materia} • ${r.fecha}</div>
+            </div>
+          </div>
+          <span class="podium-score">${r.puntos} ⭐</span>
+        </div>
+      `;
+    }).join('');
+  }
 
   const htmlChips = jugadores.map(j => {
     const xpJ = obtenerXPJugador(j);
@@ -918,9 +936,9 @@ function verBibliotecaSeparada() {
     htmlContenido += "<p style='text-align:center; color:#64748b;'>No hay resúmenes cargados para este bloque.</p>";
   } else {
     htmlContenido += lecciones.map(l => `
-      <div style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 12px; border-left: 5px solid #3b82f6; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-        <h4 style="margin: 0 0 5px 0; color: var(--rojo-oscuro); font-size:1.1rem;">${l.titulo}</h4>
-        <p style="font-size: 0.98rem; line-height:1.4; margin: 5px 0; color:var(--texto-oscuro);">${l.resumen_corto || l.texto}</p>
+      <div style="background: var(--fondo-card); border-radius: 14px; padding: 15px; margin-bottom: 12px; border: 1.5px solid var(--borde-gamer); border-left: 5px solid #38bdf8; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+        <h4 style="margin: 0 0 5px 0; color: #38bdf8; font-size:1.1rem;">${l.titulo}</h4>
+        <p style="font-size: 0.98rem; line-height:1.5; margin: 5px 0; color:var(--texto-principal);">${l.resumen_corto || l.texto}</p>
       </div>
     `).join('');
   }
@@ -1073,9 +1091,9 @@ function filtrarGlosario() {
   }
   
   listaContenedor.innerHTML = filtrados.map(t => `
-    <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #facc15; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-      <strong style="color:var(--rojo-oscuro); font-size:1.05rem;">${t.termino}</strong>
-      <p style="margin: 4px 0 0 0; font-size:0.92rem; color:var(--texto-oscuro);">${t.def}</p>
+    <div style="background: var(--fondo-card); padding: 14px; border-radius: 14px; margin-bottom: 10px; border: 1.5px solid var(--borde-gamer); border-left: 5px solid #facc15; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+      <strong style="color:#fde047; font-size:1.05rem;">${t.termino}</strong>
+      <p style="margin: 4px 0 0 0; font-size:0.95rem; line-height:1.45; color:var(--texto-principal);">${t.def}</p>
     </div>
   `).join('');
 }
@@ -1263,8 +1281,8 @@ function renderPreguntaSimulacro() {
       </div>
     </div>
 
-    <div style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.05); margin-bottom:15px;">
-      <p style="font-size:1.05rem; font-weight:bold; margin:0; color:var(--texto-oscuro);">${p.pregunta}</p>
+    <div style="background: var(--fondo-card); padding: 15px; border-radius: 14px; border: 1.5px solid var(--borde-gamer); box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 12px;">
+      <p style="font-size:1.05rem; font-weight:bold; margin:0; color:var(--texto-principal); line-height:1.4;">${p.pregunta}</p>
     </div>
     <div style="display:flex; flex-direction:column; gap:10px;">
       ${htmlOpciones}
@@ -1437,24 +1455,24 @@ function endGame() {
 
   document.getElementById('title').innerText = "ANÁLISIS FINAL DE PARTIDA";
   document.getElementById('display-area').innerHTML = `
-    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align:center;">
-      <h3 style="margin:0; color: var(--texto-oscuro);">¡Desafío Completado! 🎮</h3>
-      <p style="margin:5px 0; color:#64748b;">Jugador: <b>${jugadorActual}</b> • ${preguntasSimulacro.length} Preguntas</p>
+    <div style="background: var(--fondo-card); border: 1.5px solid var(--borde-gamer); padding: 20px; border-radius: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); text-align:center;">
+      <h3 style="margin:0; color: var(--texto-principal);">¡Desafío Completado! 🎮</h3>
+      <p style="margin:5px 0; color:#94a3b8;">Jugador: <b>${jugadorActual}</b> • ${preguntasSimulacro.length} Preguntas</p>
       
-      <div style="font-size: 3.5rem; color: var(--rojo-principal); font-weight: bold; margin: 10px 0; line-height:1;">
-        ${score} <span style="font-size:1.5rem; color:#64748b;">Pts</span>
+      <div style="font-size: 3.5rem; color: var(--rojo-principal); font-weight: bold; margin: 10px 0; line-height:1; text-shadow: 0 0 15px rgba(244,63,94,0.4);">
+        ${score} <span style="font-size:1.5rem; color:#94a3b8;">Pts</span>
       </div>
       
-      ${esNuevoRecord ? `<div style="background:#fef08a; color:#854d0e; font-weight:bold; padding:6px 14px; border-radius:20px; font-size:0.95rem; display:inline-block; margin-bottom:15px; border:1px solid #facc15; animation:popIn 0.3s;">🏆 ¡NUEVO RÉCORD PERSONAL! 🏆</div>` : ''}
+      ${esNuevoRecord ? `<div style="background:rgba(250,204,21,0.2); color:#fde047; font-weight:bold; padding:6px 14px; border-radius:20px; font-size:0.95rem; display:inline-block; margin-bottom:15px; border:1px solid #facc15; animation:popIn 0.3s; text-shadow: 0 0 8px rgba(250,204,21,0.5);">🏆 ¡NUEVO RÉCORD PERSONAL! 🏆</div>` : ''}
 
-      <table style="width:100%; border-collapse:collapse; margin: 15px 0; text-align:left; font-size:0.95rem; color: var(--texto-oscuro);">
-        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 0; color:#64748b;">Tiempo Empleado:</td><td style="padding:8px 0; font-weight:bold; text-align:right;">⏳ ${duracionTexto}</td></tr>
-        <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:8px 0; color:#64748b;">Efectividad:</td><td style="padding:8px 0; font-weight:bold; text-align:right;">📈 ${porcentajeAciertos}%</td></tr>
+      <table style="width:100%; border-collapse:collapse; margin: 15px 0; text-align:left; font-size:0.95rem; color: var(--texto-principal);">
+        <tr style="border-bottom:1px solid #25334d;"><td style="padding:8px 0; color:#94a3b8;">Tiempo Empleado:</td><td style="padding:8px 0; font-weight:bold; text-align:right;">⏳ ${duracionTexto}</td></tr>
+        <tr style="border-bottom:1px solid #25334d;"><td style="padding:8px 0; color:#94a3b8;">Efectividad:</td><td style="padding:8px 0; font-weight:bold; text-align:right;">📈 ${porcentajeAciertos}%</td></tr>
       </table>
 
-      <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid var(--rojo-principal); text-align:left; margin-top:10px;">
+      <div style="background:#111a2c; padding:12px; border-radius:12px; border: 1px solid var(--borde-gamer); border-left:4px solid var(--rojo-principal); text-align:left; margin-top:10px;">
         <strong style="color:${colorDiagnostico}; font-size:0.95rem;">📊 Diagnóstico del Tutor:</strong>
-        <p style="margin:4px 0 0 0; font-size:0.9rem; line-height:1.4; color:#334155;">${diagnostico}</p>
+        <p style="margin:4px 0 0 0; font-size:0.9rem; line-height:1.4; color:#cbd5e1;">${diagnostico}</p>
       </div>
     </div>
   `;
