@@ -85,7 +85,7 @@ const CONTENIDOS_EDUCATIVOS = {
       trimestres: {
         "Q1": { guia: [], glosario: [], simulacro: [] },
         "Q2": { guia: [...], glosario: [...], simulacro: [...] },
-        "Q3": { guia: [], glosario: [], simulacro: [] },
+        "Q3": { guia: [...], glosario: [...], simulacro: [...] },
         "Q4": { guia: [], glosario: [], simulacro: [] }
       }
     }
@@ -157,6 +157,7 @@ Al modificar o expandir la plataforma, cualquier asistente de IA o colaborador d
 6. **Mantenimiento de `Q4`:**
    - Incluso si un trimestre aún no tiene contenidos, debe inicializarse como `{ guia: [], glosario: [], simulacro: [] }` para evitar errores de referencia `undefined`.
 7. **Tono Pedagógico:** Mantener un estilo motivador, respetuoso, riguroso pero accesible para un estudiante de 11-12 años en Argentina (ejemplos locales: La Forestal, Ferrocarril del Oeste, trenes a Retiro/Constitución, etc.).
+8. **Usuario Predeterminado:** El jugador activo y predeterminado es exclusivamente **ENZO**, manteniendo limpia la lista de jugadores y el Salón de la Fama de registros de prueba.
 
 ---
 
@@ -190,6 +191,6 @@ Esta suite valida:
 
 ## 🗺️ 7. Hoja de Ruta para Futuras Expansiones
 
-- **Trimestre 4 (Q4):** Carga de contenidos de fin de ciclo lectivo cuando estén disponibles en el colegio.
-- **Inglés Técnico Q3/Q4:** Incorporación de nuevos tiempos verbales (Present Continuous, Past Continuous, Wh-questions).
+- **Inglés Técnico Q3:** ✅ **COMPLETADO.** Cubre las Unidades 5 y 6 del libro escolar (*Police!* y *Mythical beasts*): vocabulario de apariencia y rostro, estructuras *used to* y *had to*, bestias míticas, partes corporales, *looks like*, comparativos y superlativos, con 6 lecciones interactivas, 30 tarjetas de glosario y 60 preguntas arcade.
+- **Trimestre 4 (Q4):** Carga de contenidos de fin de ciclo lectivo cuando estén disponibles en el colegio para todas las asignaturas.
 - **Multi-Grado:** Expansión del selector raíz a **7mo Grado** o grados inferiores utilizando la misma estructura modular en `datos.js`.

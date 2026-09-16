@@ -12,7 +12,7 @@ El sistema transforma el estudio tradicional y la preparación para exámenes en
 2. **Accesibilidad Universal con Audiolibro (TTS):** Integración nativa con la **Web Speech API** que permite la lectura fonética de lecciones completas en español para alumnos con dificultades de lectura, dislexia o fatiga visual.
 3. **Efectos de Sonido Retro Offline (Web Audio API):** Generador sintético de sonido en tiempo real sin requerir archivos `.mp3` ni conexión a internet (aciertos, errores, fanfarrias de nivel, giros de tarjetas y clics).
 4. **Gamificación Integral:**
-   - **Perfiles de Jugador:** Múltiples perfiles (Enzo y amigos) con avatares personalizados.
+   - **Perfil Predeterminado:** Configurado con **Enzo** como jugador principal (con soporte para sumar nuevos perfiles).
    - **Puntos & Niveles:** Sistema de experiencia (+XP), niveles de maestría y rangos dinámicos (Novato, Explorador, Erudito, Maestro, Leyenda).
    - **Medallero y Logros:** Desbloqueo de insignias especiales con notificaciones flotantes (*Toast Notifications*).
    - **Salón de la Fama (Leaderboard):** Tabla de récords históricos locales y sincronización opcional con la nube.
@@ -58,9 +58,20 @@ La plataforma cuenta con un árbol académico exhaustivo estructurado en `datos.
 ---
 
 ### 🇬🇧 Inglés Técnico
-* **2do Trimestre (Q2): Past Simple & Technical Grammar**
-  - **Lecciones:** Reglas de verbos regulares (`-ed`, ortografía, `didn't`, `Did`), verbos irregulares comunes, oraciones afirmativas, negativas e interrogativas.
-  - **Glosario & Simulacros:** Ejercicios de aplicación y vocabulario interactivo.
+* **2do Trimestre (Q2): Past Simple & Past Continuous**
+  - **4 Lecciones:** Pasado Simple con Verbos Regulares (reglas de sufijo `-ed`, duplicación CVC, terminación en consonante + y, negativos con `didn't`, preguntas con `Did`), Verbos Irregulares comunes (`went`, `ate`, `saw`, etc.), Pasado Continuo para acciones en desarrollo (`was/were` + verbo en `-ing`), y Combinación de Pasados con conectores (`when` para interrupciones cortas y `while` para acciones continuas).
+  - **Glosario:** 12 términos gramaticales clave.
+  - **Simulacro:** 60 preguntas arcade con pistas y explicaciones pedagógicas.
+* **3er Trimestre (Q3): Physical Appearance, Habits (Used To), Obligations (Had To), Mythical Beasts, Comparatives & Superlatives (Units 5 & 6)**
+  - **6 Lecciones:**
+    1. *Hair & Face Vocabulary (Unit 5):* Cabello (`dark`, `fair`, `blond`, `curly`, `straight`, `long/short`), rasgos faciales (`moustache`, `beard`, `scar`, `chin`, `cheek`) y descripciones con `have got / has got`.
+    2. *Used to — Hábitos y Estados del Pasado (Unit 5):* Hábitos que ya no ocurren (*"solía"*), regla de forma base, afirmativo (`used to`), negativo (`didn't use to`) y preguntas (`Did you use to...?`).
+    3. *Had to — Obligaciones en el Pasado (Unit 5):* Deberes obligatorios pasados (*"tuve que"*), negativo (`didn't have to`), preguntas (`Did you have to...?`) y contrastes con *used to*.
+    4. *Mythical Beasts & Animal Bodies (Unit 6):* Partes corporales (`wing`, `horn`, `scales`, `feathers`, `tail`, `beak`, `neck`, `tongue`), bestias míticas (`Pegasus`, `Sphinx`, `unicorn`, `mermaid`, `centaur`, `phoenix`) y estructura visual `looks like`.
+    5. *Comparatives (Unit 6):* Comparaciones con `than`, reglas para adjetivos cortos (`-er than`), terminados en `-e`, duplicación CVC (`bigger than`), terminados en `-y` (`heavier than`, `scarier than`), largos (`more dangerous than`) e irregulares (`better than`, `worse than`).
+    6. *Superlatives & Dinosaurs (Unit 6):* Récords supremos con `the ... -est`, duplicación CVC (`the biggest`), terminados en `-y` (`the heaviest`), adjetivos largos (`the most dangerous`), irregulares (`the best`, `the worst`) y dietas prehistóricas (`herbivores`, `carnivores`, `omnivores`).
+  - **Glosario:** 30 tarjetas flashcard 3D bilingües.
+  - **Simulacro:** 60 preguntas de examen con balance perfecto de respuestas (20 de opción A, 20 de B y 20 de C), pistas y retroalimentación constructiva.
 
 ---
 
