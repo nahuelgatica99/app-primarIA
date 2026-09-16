@@ -116,10 +116,7 @@ const CONFIG_CLOUD = {
 const LeaderboardManager = {
   claveLocal: 'arcade_leaderboard',
   datosIniciales: [
-    { jugador: "ENZO", puntos: 280, materia: "Ciencias Sociales", fecha: "Hoy" },
-    { jugador: "NICO", puntos: 250, materia: "Inglés Técnico", fecha: "Ayer" },
-    { jugador: "SANTI", puntos: 210, materia: "Ciencias Sociales", fecha: "15/09" },
-    { jugador: "MATEO", puntos: 180, materia: "Ciencias Naturales", fecha: "14/09" }
+    { jugador: "ENZO", puntos: 280, materia: "Ciencias Sociales", fecha: "Hoy" }
   ],
   obtenerUrl() {
     if (!CONFIG_CLOUD.url) return "";
@@ -132,7 +129,11 @@ const LeaderboardManager = {
   obtenerRecords() {
     try {
       const guardados = localStorage.getItem(this.claveLocal);
-      if (guardados) return JSON.parse(guardados);
+      if (guardados) {
+        let lista = JSON.parse(guardados);
+        lista = lista.filter(r => r.jugador !== 'NICO' && r.jugador !== 'SANTI' && r.jugador !== 'MATEO');
+        if (lista.length > 0) return lista;
+      }
     } catch(e) {}
     return [...this.datosIniciales];
   },
@@ -298,8 +299,19 @@ function sumarXP(cantidad, motivo) {
 }
 
 // --- GESTIÓN DE PERFILES Y JUGADORES ARCADE ---
-let jugadores = JSON.parse(localStorage.getItem('arcade_jugadores')) || ['ENZO', 'NICO', 'SANTI', 'MATEO'];
-let jugadorActual = localStorage.getItem('arcade_jugador_activo') || 'ENZO';
+let jugadores = ['ENZO'];
+try {
+  let guardados = JSON.parse(localStorage.getItem('arcade_jugadores'));
+  if (Array.isArray(guardados)) {
+    guardados = guardados.filter(j => j !== 'NICO' && j !== 'SANTI' && j !== 'MATEO');
+    if (guardados.length > 0) jugadores = guardados;
+  }
+} catch(e) {}
+if (!jugadores.includes('ENZO')) jugadores.unshift('ENZO');
+localStorage.setItem('arcade_jugadores', JSON.stringify(jugadores));
+
+let jugadorActual = 'ENZO';
+localStorage.setItem('arcade_jugador_activo', 'ENZO');
 
 function abrirSelectorJugador() {
   ArcadeAudio.playSfx('click');
